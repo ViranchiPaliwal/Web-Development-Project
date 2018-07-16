@@ -1,10 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom'
 import {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    DirectionsRenderer,
+    withScriptjs
 } from "react-google-maps";
 import {compose, withProps, lifecycle} from "recompose";
 
