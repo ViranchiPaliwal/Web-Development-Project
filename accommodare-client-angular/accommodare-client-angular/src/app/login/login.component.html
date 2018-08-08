@@ -1,0 +1,15 @@
+<app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
+<div class="container">
+  <h2 class="login-component">Login</h2>
+  <input [(ngModel)]="username"
+         placeholder="username"
+         class="form-control login-component"/>
+  <input [(ngModel)]="password"
+         placeholder="password"
+         type="password"
+         class="form-control login-component"/>
+  <button (click)="login(username, password)"
+          class="btn btn-primary btn-block login-component">
+    Login
+  </button>
+</div>

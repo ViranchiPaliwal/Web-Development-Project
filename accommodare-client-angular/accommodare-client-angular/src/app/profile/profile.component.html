@@ -1,0 +1,43 @@
+<app-navigation-bar [isLoggedIn]="isLoggedIn" [isAdmin]="isAdmin"></app-navigation-bar>
+<div class="container">
+    <h2 class="profile-component">Profile</h2>
+
+    <label for="username">Username</label>
+    <input id="username"
+           readonly
+           [(ngModel)]="user.username"
+           placeholder="Bob124"
+           class="form-control profile-input"/>
+    <label for="first">First Name</label>
+    <input id="first"
+           [(ngModel)]="user.firstName"
+           placeholder="Bob"
+           class="form-control profile-input"/>
+    <label for="last">Last Name</label>
+    <input id="last"
+           [(ngModel)]="user.lastName"
+           placeholder="Affleck"
+           class="form-control profile-input"/>
+    <label for="email">Email Address</label>
+    <input id="email"
+           type="email"
+           [(ngModel)]="user.email"
+           placeholder="bob@gmail.com"
+           class="form-control profile-input"/>
+    <label for="phone">Phone Number</label>
+    <input id="phone"
+           type="number"
+           [(ngModel)]="user.phone"
+           placeholder="8675641232"
+           class="form-control profile-input"/>
+    <label for="address">Address</label>
+    <input id="address"
+           [(ngModel)]="user.address"
+           placeholder="120 River View Apt."
+           class="form-control profile-input"/>
+
+    <button (click)="updateProfile()"
+            class="btn btn-success btn-block profile-btn">
+        Update
+    </button>
+</div>

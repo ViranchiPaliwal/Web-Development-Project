@@ -1,0 +1,32 @@
+<app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
+<div class="container">
+  <h2 class="register-component">Register</h2>
+  <div class="alert alert-danger" role="alert" *ngIf="isUsernameExist">
+        Username already exist. Try another username.
+  </div>
+
+  <div class="alert alert-danger" role="alert" *ngIf="isPasswordInvaild">
+    Verification password incorrect.
+  </div>
+
+  <input [(ngModel)]="username"
+         placeholder="username"
+         class="form-control register-component"/>
+  <input [(ngModel)]="password"
+         placeholder="password"
+         type="password"
+         class="form-control register-component"/>
+  <input [(ngModel)]="password2"
+         type="password"
+         placeholder="verify password"
+         class="form-control register-component"/>
+  <select class='form-control register-component' required [(ngModel)]='userType'>
+    <option class='option' *ngFor='let user of userTypes' [value]="user">{{user}}</option>
+  </select>
+
+  <button (click)="register()"
+          class="btn btn-primary btn-block register-component">
+    Register
+  </button>
+
+</div>
