@@ -1,5 +1,6 @@
 import {Address} from "./address.model.client";
 export class Property {
+  name: String;
   type: String;
   availabilityType: String;
   university: String;

@@ -15,6 +15,8 @@ import {LoginComponent} from './login/login.component';
 import {NavigationBarComponent} from "./navigation-bar/navigation-bar.component";
 import {UserServiceClient} from "./services/user.service.client";
 import {PropertyServiceClient} from "./services/property.service.client";
+import { OwnerListingComponent } from './owner-listing/owner-listing.component';
+import {UniversityServiceClient} from "./services/university.service.client";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {PropertyServiceClient} from "./services/property.service.client";
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    OwnerListingComponent
 
   ],
   imports: [
@@ -38,7 +41,8 @@ import {PropertyServiceClient} from "./services/property.service.client";
     routing
   ],
   providers: [UserServiceClient,
-              PropertyServiceClient],
+              PropertyServiceClient,
+              UniversityServiceClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

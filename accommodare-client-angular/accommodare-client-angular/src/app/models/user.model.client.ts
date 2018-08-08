@@ -1,3 +1,5 @@
+import {USER_ROLE} from "../enums/userRole";
+
 export class User {
     username: string;
     password: string;
@@ -6,4 +8,5 @@ export class User {
     email: string;
     address: string;
     phone: string;
+    role: USER_ROLE
 }

@@ -1,6 +1,11 @@
 <app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
-<div class="container">
+<div class="container" *ngIf="user.role === role.Owner">
   <h2 class="register-component">Property Details</h2>
+
+  <div   class="form-group"> <!-- Street 1 -->
+    <label for="name" class="control-label">Name</label>
+    <input  type="text" class="form-control" id="name" [(ngModel)]="property.name" placeholder="My Shadowbrook Guest House">
+  </div>
 
   <label for="university">University</label>
   <select id="university" class='form-control register-component' required [(ngModel)]='property.university'>
@@ -75,4 +80,13 @@
     Submit
   </button>
 
+</div>
+
+<div class="container" *ngIf="user.role === role.Tenant">
+<h2 class="register-component">Search Property</h2>
+<label for="universit">University</label>
+<!--<select id="universit" class='form-control register-component' required [(ngModel)]='property.university'>-->
+  <!--<option class='university' *ngFor='let university of universities' [value]="university">{{university}}</option>-->
+<!--</select>-->
+  <app-autocomplete id="universit" [(options)]="universities"></app-autocomplete>
 </div>

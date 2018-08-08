@@ -5,6 +5,7 @@ import {HomeScreenComponent} from "./home-screen/home-screen.component";
 import {LoginComponent} from "./login/login.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {RegisterComponent} from "./register/register.component";
+import {OwnerListingComponent} from "./owner-listing/owner-listing.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -15,7 +16,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: '**', component: HomeScreenComponent},
-  {path: '**', component: HomeScreenComponent} // last
+  {path: 'listing', component: OwnerListingComponent},
+  {path: '**', component: HomeScreenComponent}
 ];
 export const routing = RouterModule.forRoot(appRoutes);

@@ -1,6 +1,25 @@
 export class PropertyServiceClient {
     URL = 'http://localhost:4000/api/';
 
+  createProperty(property) {
+    return fetch(this.URL + 'owner/property', {
+      body: JSON.stringify(property),
+      credentials: 'include', // include, same-origin, *omit
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
+  findPropertiesForOwner(){
+    return fetch(this.URL + 'owner/property',{
+        credentials: 'include'
+      }
+      )
+      .then(response => response.json());
+  }
+
     findUserById(userId) {
         return fetch(this.URL + 'user/' + userId)
             .then(response => response.json());
@@ -53,14 +72,5 @@ export class PropertyServiceClient {
             .then(response => response.json());
     }
 
-    createProperty(property) {
-        return fetch(this.URL + 'owner/property', {
-            body: JSON.stringify(property),
-            credentials: 'include', // include, same-origin, *omit
-            method: 'post',
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
-    }
+
 }

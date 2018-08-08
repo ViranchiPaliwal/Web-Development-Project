@@ -1,0 +1,7 @@
+<app-navigation-bar [isLoggedIn]="true"></app-navigation-bar>
+<ul class="list-group">
+  <li *ngFor="let property of propList"
+      class="list-group-item">
+      {{property.name}}
+  </li>
+</ul>
