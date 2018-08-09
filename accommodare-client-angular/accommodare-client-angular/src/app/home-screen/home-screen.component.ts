@@ -8,6 +8,7 @@ import {User} from "../models/user.model.client";
 import {UserServiceClient} from "../services/user.service.client";
 import {USER_ROLE} from "../enums/userRole";
 import {UniversityServiceClient} from "../services/university.service.client";
+import {University} from "../models/university.model.client";
 
 @Component({
   selector: 'app-home-screen',
@@ -30,7 +31,7 @@ export class HomeScreenComponent implements OnInit {
   propertyType
   propertyTypes
   university
-  universities = []
+  universities : University[] = []
   address
   property: Property = new Property()
   availTypes
@@ -79,9 +80,9 @@ export class HomeScreenComponent implements OnInit {
           this.universityService.findAllUniversities()
             .then((universities) => {
               this.universities = universities.map(function (item) {
-                return item['Institution_Name'];
+                return {name: item['Institution_Name'],
+                        id: item['_id']};
               });
-              console.log('done');
             }
         );
         } else {
@@ -114,6 +115,9 @@ export class HomeScreenComponent implements OnInit {
       .then(() =>
         this.router.navigate(['listing'])
       );
+  }
+  autocompleteOwnerValueChange(selectedUniversity){
+    this.property.university = selectedUniversity.id;
   }
 
 

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {University} from "../models/university.model.client";
 
 @Component({
   selector: 'app-autocomplete',
@@ -10,8 +11,9 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class AutocompleteComponent implements OnInit {
   myControl = new FormControl();
-  @Input() options: string[];
-  filteredOptions: Observable<string[]>;
+  @Input() options: University[];
+  @Input() valueChange: Function;
+  filteredOptions: Observable<University>;
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
@@ -21,9 +23,13 @@ export class AutocompleteComponent implements OnInit {
       );
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): object[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter(option => {
+      if (option.name.toLowerCase().includes(filterValue)) {
+        return option;
+      }
+    })
   }
 }

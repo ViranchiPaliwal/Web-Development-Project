@@ -1,5 +1,5 @@
 <app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
-<div class="container" *ngIf="user.role === role.Owner">
+<div class="container" *ngIf="user.role === role.owner">
   <h2 class="register-component">Property Details</h2>
 
   <div   class="form-group"> <!-- Street 1 -->
@@ -7,10 +7,8 @@
     <input  type="text" class="form-control" id="name" [(ngModel)]="property.name" placeholder="My Shadowbrook Guest House">
   </div>
 
-  <label for="university">University</label>
-  <select id="university" class='form-control register-component' required [(ngModel)]='property.university'>
-    <option class='university' *ngFor='let university of universities' [value]="university">{{university}}</option>
-  </select>
+  <label for="owneruniversity">University</label>
+  <app-autocomplete id="owneruniversity" [valueChange]="autocompleteOwnerValueChange" [(options)]="universities"></app-autocomplete>
 
   <label for="propType">Type of place</label>
   <select id="propType" class='form-control register-component' required [(ngModel)]='property.type'>
@@ -83,10 +81,5 @@
 </div>
 
 <div class="container" *ngIf="user.role === role.Tenant">
-<h2 class="register-component">Search Property</h2>
-<label for="universit">University</label>
-<!--<select id="universit" class='form-control register-component' required [(ngModel)]='property.university'>-->
-  <!--<option class='university' *ngFor='let university of universities' [value]="university">{{university}}</option>-->
-<!--</select>-->
-  <app-autocomplete id="universit" [(options)]="universities"></app-autocomplete>
+<app-home-tenant></app-home-tenant>
 </div>

@@ -1,0 +1,8 @@
+<div class="container">
+  <h2 class="register-component">Search Property</h2>
+  <label for="universit">University</label>
+  <!--<select id="universit" class='form-control register-component' required [(ngModel)]='property.university'>-->
+  <!--<option class='university' *ngFor='let university of universities' [value]="university">{{university}}</option>-->
+  <!--</select>-->
+  <app-autocomplete id="universit" [valueChange]="autocompleteValueChange" [(options)]="universities"></app-autocomplete>
+</div>
