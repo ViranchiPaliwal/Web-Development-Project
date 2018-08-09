@@ -8,4 +8,15 @@ export class Property {
   description: String;
   rooms: Number;
   size: Number;
+
+  constructor(){
+    this.name = "";
+    this.type = "";
+    this.availabilityType = "";
+    this.university = "";
+    this.address = new Address();
+    this.description = "";
+    this.rooms = 0;
+    this.size = 0;
+  }
 }

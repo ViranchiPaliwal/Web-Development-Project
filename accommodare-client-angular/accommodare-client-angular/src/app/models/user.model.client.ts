@@ -9,4 +9,15 @@ export class User {
     address: string;
     phone: string;
     role: USER_ROLE
+
+
+  constructor() {
+    this.username = "";
+    this.password = "";
+    this.firstName = "";
+    this.lastName = "";
+    this.email = "";
+    this.address = "";
+    this.phone = "";
+  }
 }

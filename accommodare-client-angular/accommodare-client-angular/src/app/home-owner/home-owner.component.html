@@ -1,0 +1,79 @@
+<div class="container">
+  <h2 class="register-component">Property Details</h2>
+
+<div   class="form-group"> <!-- Street 1 -->
+  <label for="name" class="control-label">Name</label>
+  <input  type="text" class="form-control" id="name" [(ngModel)]="property.name" placeholder="My Shadowbrook Guest House">
+</div>
+
+<label for="owneruniversity">University</label>
+<app-autocomplete id="owneruniversity" [valueChange]="autocompleteOwnerValueChange.bind(this)" [(options)]="universities"></app-autocomplete>
+
+<label for="propType">Type of place</label>
+<select id="propType" class='form-control register-component' required [(ngModel)]='property.type'>
+  <option class='aptType' *ngFor='let type of propertyTypes' [value]="type">{{type}}</option>
+</select>
+
+
+
+<label for="availablity">Availablity</label>
+<select id="availablity" class='form-control register-component' required [(ngModel)]='property.availabilityType'>
+  <option class='availType' *ngFor='let availType of availTypes' [value]="availType">{{availType}}</option>
+</select>
+
+
+<label for="rooms">Number of Rooms</label>
+<input id="rooms"
+       type="number"
+       [(ngModel)]="property.rooms"
+       placeholder="Number of Rooms Ex: 4"
+       class="form-control profile-input"/>
+
+<div   class="form-group"> <!-- Street 1 -->
+  <label for="autocomplete" class="control-label">Street Address</label>
+  <input #autocomplete type="text" class="form-control" id="autocomplete" [(ngModel)]="property.address.number" name="street1" placeholder="Street address, P.O. box, company name, c/o">
+</div>
+
+<div class="form-group"> <!-- Street 2 -->
+  <label for="street2_id" class="control-label">Apt, Suite.(optional) </label>
+  <input [(ngModel)]='property.address.street' type="text" class="form-control" id="street2_id" name="street2" placeholder="Apartment, suite, unit, building, floor, etc.">
+</div>
+
+<div class="form-group"> <!-- City-->
+  <label for="city_id" class="control-label">City</label>
+  <input type="text" [(ngModel)]='property.address.city' class="form-control" id="city_id" name="city" placeholder="Smallville">
+</div>
+
+<div class="form-group"> <!-- State Button -->
+  <label for="state_id" class="control-label">State</label>
+  <input type="text" [(ngModel)]='property.address.state' class="form-control" id="state_id" name="city" placeholder="Smallville">
+</div>
+
+<div class="form-group"> <!-- Country Button -->
+  <label for="country_id" class="control-label">Country</label>
+  <input type="text" [(ngModel)]='property.address.country' class="form-control" id="country_id" name="city" placeholder="Smallville">
+</div>
+
+<div class="form-group"> <!-- Zip Code-->
+  <label for="zip_id" class="control-label">Zip Code</label>
+  <input type="number"  [(ngModel)]="property.address.zip" class="form-control" id="zip_id" name="zip" placeholder="#####">
+</div>
+
+<label for="description">Description</label>
+<input id="description"
+       [(ngModel)]="property.description"
+       placeholder="About your place"
+       class="form-control register-component"/>
+
+<label for="size">Size</label>
+<input id="size"
+       [(ngModel)]="property.size"
+       placeholder="in sq ft Example: 1200"
+       type="Number"
+       class="form-control register-component"/>
+
+<button (click)="submit()"
+        class="btn btn-primary btn-block register-component">
+  Submit
+</button>
+</div>

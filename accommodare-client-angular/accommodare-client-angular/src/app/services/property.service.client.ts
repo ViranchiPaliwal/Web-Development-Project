@@ -20,6 +20,12 @@ export class PropertyServiceClient {
       .then(response => response.json());
   }
 
+  findPropertiesForUniversity(universityId){
+    return fetch(this.URL + 'property/'+universityId,
+    )
+      .then(response => response.json());
+  }
+
     findUserById(userId) {
         return fetch(this.URL + 'user/' + userId)
             .then(response => response.json());

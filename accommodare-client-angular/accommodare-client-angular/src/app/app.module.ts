@@ -18,6 +18,7 @@ import {PropertyServiceClient} from "./services/property.service.client";
 import { OwnerListingComponent } from './owner-listing/owner-listing.component';
 import {UniversityServiceClient} from "./services/university.service.client";
 import { HomeTenantComponent } from './home-tenant/home-tenant.component';
+import { HomeOwnerComponent } from './home-owner/home-owner.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HomeTenantComponent } from './home-tenant/home-tenant.component';
     ProfileComponent,
     NavigationBarComponent,
     OwnerListingComponent,
-    HomeTenantComponent
+    HomeTenantComponent,
+    HomeOwnerComponent
 
   ],
   imports: [

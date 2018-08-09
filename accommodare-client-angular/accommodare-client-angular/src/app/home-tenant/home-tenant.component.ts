@@ -4,6 +4,7 @@ import {UserServiceClient} from "../services/user.service.client";
 import {Router} from "@angular/router";
 import {University} from "../models/university.model.client";
 import {PropertyServiceClient} from "../services/property.service.client";
+import {Property} from "../models/property.model.client";
 
 @Component({
   selector: 'app-home-tenant',
@@ -20,7 +21,7 @@ export class HomeTenantComponent implements OnInit {
 
   @ViewChild('autocomplete') autocomplete: any;
 
-
+  properties : Property[] = []
   universities : University[] = []
 
   ngOnInit() {
@@ -36,7 +37,9 @@ export class HomeTenantComponent implements OnInit {
   }
 
   autocompleteValueChange(selectedUniversity){
-    //this.propertyService.
+    this.propertyService
+      .findPropertiesForUniversity(selectedUniversity.id)
+      .then((properties)=> this.properties = properties);
   }
 
 
