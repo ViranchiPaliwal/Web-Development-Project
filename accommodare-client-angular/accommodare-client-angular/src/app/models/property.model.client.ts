@@ -8,7 +8,8 @@ export class Property {
   description: String;
   rooms: Number;
   size: Number;
-
+  photoId : String[]
+  price: Number;
   constructor(){
     this.name = "";
     this.type = "";
@@ -18,5 +19,6 @@ export class Property {
     this.description = "";
     this.rooms = 0;
     this.size = 0;
+    this.photoId = [];
   }
 }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {routing} from './app.routing';
-
+import {FileUploadModule} from 'ng2-file-upload';
 import { AppComponent } from './app.component';
 import { AddressAutocompleteComponent } from './address-autocomplete/address-autocomplete.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
@@ -19,6 +19,10 @@ import { OwnerListingComponent } from './owner-listing/owner-listing.component';
 import {UniversityServiceClient} from "./services/university.service.client";
 import { HomeTenantComponent } from './home-tenant/home-tenant.component';
 import { HomeOwnerComponent } from './home-owner/home-owner.component';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
+import {HttpClientModule} from "@angular/common/http";
+import {WishlistServiceClient} from "./services/wishlist.service.client";
 
 @NgModule({
   declarations: [
@@ -42,11 +46,15 @@ import { HomeOwnerComponent } from './home-owner/home-owner.component';
     MatAutocompleteModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
+    FileUploadModule,
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'hssso26ip', upload_preset: 'wups8v99'}),
     routing
   ],
   providers: [UserServiceClient,
               PropertyServiceClient,
-              UniversityServiceClient],
+              UniversityServiceClient,
+              WishlistServiceClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

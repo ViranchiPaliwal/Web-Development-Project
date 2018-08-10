@@ -53,12 +53,7 @@ export class UserServiceClient {
             .then(response => response.json());
     }
 
-    createUser(username, password, userType) {
-        const user = {
-            username: username,
-            password: password,
-            role: userType
-        };
+    createUser(user) {
         return fetch(this.URL + 'register', {
             body: JSON.stringify(user),
             credentials: 'include', // include, same-origin, *omit

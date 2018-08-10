@@ -8,8 +8,8 @@ export class User {
     email: string;
     address: string;
     phone: string;
-    role: USER_ROLE
-
+    role: USER_ROLE;
+    photoId: string;
 
   constructor() {
     this.username = "";
@@ -19,5 +19,6 @@ export class User {
     this.email = "";
     this.address = "";
     this.phone = "";
+    this.photoId = "";
   }
 }

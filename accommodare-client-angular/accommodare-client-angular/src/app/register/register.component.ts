@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {UserServiceClient} from '../services/user.service.client';
+import {User} from "../models/user.model.client";
 
 @Component({
     selector: 'app-register',
@@ -13,27 +14,25 @@ export class RegisterComponent implements OnInit {
                 private service: UserServiceClient) {
     }
 
-    username;
-    userType;
-    password;
+    user: User = new User()
     password2;
     isLoggedIn = false;
     isPasswordInvaild = false;
     isUsernameExist = false;
     userTypes= ["Owner", "Tenant"];
     register() {
-        if (this.password !== this.password2) {
+        if (this.user.password !== this.password2) {
             this.isPasswordInvaild = true;
             return;
         } else {
             this.isPasswordInvaild = false;
         }
-        this.service.findUserByUserName(this.username)
+        this.service.findUserByUserName(this.user.username)
             .then(user => {
                 if (user.invalid) {
                     this.isUsernameExist = false;
                     this.service
-                        .createUser(this.username, this.password, this.userType)
+                        .createUser(this.user)
                         .then(() =>
                             this.router.navigate(['profile']));
                 } else {

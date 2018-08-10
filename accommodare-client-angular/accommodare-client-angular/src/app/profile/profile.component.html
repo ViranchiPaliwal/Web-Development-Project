@@ -1,43 +1,129 @@
 <app-navigation-bar [isLoggedIn]="isLoggedIn" [isAdmin]="isAdmin"></app-navigation-bar>
 <div class="container">
-    <h2 class="profile-component">Profile</h2>
+  <h2 class="profile-component">Profile</h2>
+  <div class="row">
+    <div class="col-4">
+      <div *ngIf="user.photoId!==''">
+        <cl-image
+          [public-id]=user.photoId
+          class="thumbnail inline"
+          width="300"
+          height="300"
+          crop="fit"
+          quality="80"
+          format="jpg"
+        >
+        </cl-image>
+      </div>
+      <div *ngIf="user.photoId===''">
+        <img src="../../assets/img/default-profile.png">
+      </div>
+      <button (click)="fileInput.click()" class="btn btn-success btn-block profile-btn">Upload</button>
+      <span
+        style="visibility: hidden; position: absolute; overflow: hidden; width: 0px; height:0px;border:none;margin:0; padding:0">
+     <input type="file" id="fileupload" #fileInput ng2FileSelect [uploader]="uploader" (change)="fileInput.value=''"
+            multiple/>
+    </span>
+      <div class="file" *ngFor="let response of responses; let i = index">
+        <div class="status">
+          Uploading... {{response.progress}}%
+          <div *ngIf="!response.status">In progress</div>
+          <div class="status-code" *ngIf="response.status">{{response.status}}</div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress" role="progressbar" [style.width.%]="response.progress"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <label for="username">Username</label>
+      <input id="username"
+             readonly
+             [(ngModel)]="user.username"
+             placeholder="Bob124"
+             class="form-control profile-input"/>
+      <label for="first">First Name</label>
+      <input id="first"
+             [(ngModel)]="user.firstName"
+             placeholder="Bob"
+             class="form-control profile-input"/>
+      <label for="last">Last Name</label>
+      <input id="last"
+             [(ngModel)]="user.lastName"
+             placeholder="Affleck"
+             class="form-control profile-input"/>
+      <label for="email">Email Address</label>
+      <input id="email"
+             type="email"
+             [(ngModel)]="user.email"
+             placeholder="bob@gmail.com"
+             class="form-control profile-input"/>
+      <label for="phone">Phone Number</label>
+      <input id="phone"
+             type="number"
+             [(ngModel)]="user.phone"
+             placeholder="8675641232"
+             class="form-control profile-input"/>
+      <label for="address">Address</label>
+      <input id="address"
+             [(ngModel)]="user.address"
+             placeholder="120 River View Apt."
+             class="form-control profile-input"/>
 
-    <label for="username">Username</label>
-    <input id="username"
-           readonly
-           [(ngModel)]="user.username"
-           placeholder="Bob124"
-           class="form-control profile-input"/>
-    <label for="first">First Name</label>
-    <input id="first"
-           [(ngModel)]="user.firstName"
-           placeholder="Bob"
-           class="form-control profile-input"/>
-    <label for="last">Last Name</label>
-    <input id="last"
-           [(ngModel)]="user.lastName"
-           placeholder="Affleck"
-           class="form-control profile-input"/>
-    <label for="email">Email Address</label>
-    <input id="email"
-           type="email"
-           [(ngModel)]="user.email"
-           placeholder="bob@gmail.com"
-           class="form-control profile-input"/>
-    <label for="phone">Phone Number</label>
-    <input id="phone"
-           type="number"
-           [(ngModel)]="user.phone"
-           placeholder="8675641232"
-           class="form-control profile-input"/>
-    <label for="address">Address</label>
-    <input id="address"
-           [(ngModel)]="user.address"
-           placeholder="120 River View Apt."
-           class="form-control profile-input"/>
-
-    <button (click)="updateProfile()"
-            class="btn btn-success btn-block profile-btn">
+      <button (click)="updateProfile()"
+              class="btn btn-success btn-block profile-btn">
         Update
-    </button>
+      </button>
+    </div>
+
+    <!---->
+    <!--<div class="form_controls">-->
+    <!--<button type="file" id="fileupload" #fileInput ng2FileSelect  [uploader]="uploader" (click)="fileInput.value=''"-->
+    <!--multiple-->
+    <!--class="">-->
+    <!--Upload-->
+    <!--</button>-->
+    <!--</div>-->
+
+
+    <!--<div class="form_controls">-->
+    <!--<div class="upload_button_holder">-->
+    <!--<label class="upload_button" for="fileupload1">Upload</label>-->
+    <!--&lt;!&ndash; onChange hanlder resets the input value to get the change event when uploading the same file consecutively &ndash;&gt;-->
+    <!--<input type="file" id="fileupload1" #fileInput ng2FileSelect [uploader]="uploader" (change)="fileInput.value=''"-->
+    <!--multiple />-->
+    <!--</div>-->
+
+    <!--</div>-->
+  </div>
 </div>
+<div class="file" *ngFor="let response of responses; let i = index">
+  <h3>{{response.file.name}}</h3>
+  <button class="delete-image" *ngIf="!!response.data.delete_token" (click)="deleteImage(response.data, i)">Delete
+    image
+  </button>
+  <div class="status">
+    Uploading... {{response.progress}}%
+    <div *ngIf="!response.status">In progress</div>
+    <div class="status-code" *ngIf="response.status">Upload completed with status code {{response.status}}</div>
+  </div>
+  <div class="progress-bar">
+    <div class="progress" role="progressbar" [style.width.%]="response.progress"></div>
+  </div>
+  <div class="form_line">
+    <div class="form_controls">
+      <div class="preview">
+        <!-- Consider using https://github.com/valor-software/ng2-file-upload/issues/461 for image preview -->
+      </div>
+    </div>
+  </div>
+  <div class="info">
+    <table>
+      <tr *ngFor="let property of getFileProperties(response.data)">
+        <td> {{ property.key }}</td>
+        <td> {{ property.value | json}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+

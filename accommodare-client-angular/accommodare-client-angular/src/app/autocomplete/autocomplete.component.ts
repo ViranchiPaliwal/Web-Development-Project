@@ -13,7 +13,7 @@ export class AutocompleteComponent implements OnInit {
   myControl = new FormControl();
   @Input() options: University[];
   @Input() valueChange: Function;
-  filteredOptions: Observable<University>;
+  filteredOptions: Observable<University> = new Observable<University>();
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges

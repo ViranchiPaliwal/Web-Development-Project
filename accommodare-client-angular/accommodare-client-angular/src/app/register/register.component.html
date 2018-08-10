@@ -9,10 +9,10 @@
     Verification password incorrect.
   </div>
 
-  <input [(ngModel)]="username"
+  <input [(ngModel)]="user.username"
          placeholder="username"
          class="form-control register-component"/>
-  <input [(ngModel)]="password"
+  <input [(ngModel)]="user.password"
          placeholder="password"
          type="password"
          class="form-control register-component"/>
@@ -20,7 +20,7 @@
          type="password"
          placeholder="verify password"
          class="form-control register-component"/>
-  <select class='form-control register-component' required [(ngModel)]='userType'>
+  <select class='form-control register-component' required [(ngModel)]='user.role'>
     <option class='option' *ngFor='let user of userTypes' [value]="user">{{user}}</option>
   </select>
 

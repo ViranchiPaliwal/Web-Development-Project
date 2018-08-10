@@ -8,7 +8,28 @@
   <ul class="list-group">
     <li *ngFor="let property of properties"
         class="list-group-item">
-      {{property.name}}
+      <div class="row">
+
+      <div class="col-4">
+        <cl-image
+          [public-id]=property.photoId[0]
+          class="thumbnail inline"
+          width="300"
+          height="300"
+          crop="fit"
+          quality="80"
+          format="jpg"
+        >
+        </cl-image>
+      </div>
+        <div class="col-8">
+          <div>{{property.type}}</div>
+          <div>{{property.address.street}}, {{property.address.city}}</div>
+          <div>{{property.name}}</div>
+          <div>{{property.price}}</div>
+          <button class="btn btn-primary" *ngIf="checkAlreadyInWishList(property._id)" (click)="addToWishList(property._id)">Add to Wishlist</button>
+        </div>
+      </div>
     </li>
   </ul>
 </div>
