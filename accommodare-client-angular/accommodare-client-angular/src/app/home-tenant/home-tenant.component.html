@@ -27,14 +27,6 @@
           <div>{{property.name}}</div>
           <div>{{property.price}}</div>
           <button class="btn btn-primary" *ngIf="checkAlreadyInWishList(property._id)" (click)="addToWishList(property._id)">Add to Wishlist</button>
-          <div *ngIf="isInterested">
-          <button class="btn btn-primary"  (click)="addToWishList(property._id)">Interested</button>
-          </div>
-          <div *ngIf="isInterested">
-            <button class="btn btn-primary"  (click)="addToWishList(property._id)">Not Interested</button>
-            <div>Invitation Status</div>
-            <div>{{invite.status}}</div>
-          </div>
         </div>
       </div>
     </li>

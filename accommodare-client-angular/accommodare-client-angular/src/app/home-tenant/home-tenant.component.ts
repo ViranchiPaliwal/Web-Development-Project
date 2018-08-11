@@ -21,7 +21,6 @@ export class HomeTenantComponent implements OnInit {
               private userService: UserServiceClient,
               private universityService: UniversityServiceClient,
               private wishlistService: WishlistServiceClient,
-              private inviteService: InviteServiceClient,
               private router: Router) {
   }
 
@@ -30,8 +29,6 @@ export class HomeTenantComponent implements OnInit {
   properties : Property[] = []
   universities : University[] = []
   wishList
-  invite: Invite = new Invite()
-  isInterested
   ngOnInit() {
 
           this.universityService.findAllUniversities()
@@ -68,21 +65,8 @@ export class HomeTenantComponent implements OnInit {
   addToWishList(propertyId){
     this.wishlistService.addPropertyToWishlist(propertyId)
       .then(() => this.getTenantWishList())
-
   }
 
-  getInviteStatus(propertyId){
-      this.inviteService.findInvitationByCredentials(propertyId)
-        .then((invite) => {
-            if (invite.invalid) {
-              this.isInterested = false;
-            }
-            else{
-              this.isInterested = true;
-            }
-          }
-        )
-  }
 
 
 }

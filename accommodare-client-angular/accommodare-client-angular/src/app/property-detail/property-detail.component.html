@@ -21,5 +21,14 @@
     <div>{{property.address.street}}, {{property.address.city}}</div>
     <div>{{property.name}}</div>
     <div>{{property.price}}</div>
+    <div *ngIf="!isInterested">
+      <button class="btn btn-primary"  (click)="addToInvite(property._id)">Interested</button>
+    </div>
+    <div *ngIf="isInterested">
+      <button class="btn btn-primary"  (click)="removeFromInvite(property._id)">Not Interested</button>
+      <div>Invitation Status</div>
+      <div>{{invite.status}}</div>
+    </div>
   </div>
+
 </div>
