@@ -159,6 +159,12 @@ export class ProfileComponent implements OnInit {
 
     }
 
+  deleteProfile() {
+    this.service
+      .deleteProfile()
+      .then(this.router.navigate(['login']));
+  }
+
 
 
   updateTitle(value: string) {

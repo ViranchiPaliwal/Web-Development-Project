@@ -21,6 +21,13 @@ export class UserServiceClient {
         }).then(response => response.json());
     }
 
+  deleteProfile(){
+      return fetch(this.URL + 'profile', {
+        method: 'delete',
+        credentials: 'include'
+      }).then(response => response.json());
+    }
+
     logout() {
         return fetch(this.URL + 'logout', {
             method: 'post',

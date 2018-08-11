@@ -7,6 +7,8 @@ import {PropertyServiceClient} from "../services/property.service.client";
 import {Property} from "../models/property.model.client";
 import {WishlistServiceClient} from "../services/wishlist.service.client";
 import {Wish} from "../models/wish.model.client";
+import {InviteServiceClient} from "../services/invite.service.client";
+import {Invite} from "../models/invite.model.client";
 
 @Component({
   selector: 'app-home-tenant',
@@ -19,6 +21,7 @@ export class HomeTenantComponent implements OnInit {
               private userService: UserServiceClient,
               private universityService: UniversityServiceClient,
               private wishlistService: WishlistServiceClient,
+              private inviteService: InviteServiceClient,
               private router: Router) {
   }
 
@@ -27,6 +30,8 @@ export class HomeTenantComponent implements OnInit {
   properties : Property[] = []
   universities : University[] = []
   wishList
+  invite: Invite = new Invite()
+  isInterested
   ngOnInit() {
 
           this.universityService.findAllUniversities()
@@ -64,6 +69,19 @@ export class HomeTenantComponent implements OnInit {
     this.wishlistService.addPropertyToWishlist(propertyId)
       .then(() => this.getTenantWishList())
 
+  }
+
+  getInviteStatus(propertyId){
+      this.inviteService.findInvitationByCredentials(propertyId)
+        .then((invite) => {
+            if (invite.invalid) {
+              this.isInterested = false;
+            }
+            else{
+              this.isInterested = true;
+            }
+          }
+        )
   }
 
 

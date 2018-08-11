@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-4">
+    <ul class="list-group">
+      <li  *ngFor="let id of property.photoId"
+           class="list-group-item wbdv">
+        <cl-image
+          [public-id]=id
+          class="thumbnail inline"
+          width="300"
+          height="300"
+          crop="fit"
+          quality="80"
+          format="jpg"
+        >
+        </cl-image>
+      </li>
+    </ul>
+  </div>
+  <div class="col-8">
+    <div>{{property.type}}</div>
+    <div>{{property.address.street}}, {{property.address.city}}</div>
+    <div>{{property.name}}</div>
+    <div>{{property.price}}</div>
+  </div>
+</div>

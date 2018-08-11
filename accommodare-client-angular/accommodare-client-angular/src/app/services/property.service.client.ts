@@ -21,62 +21,22 @@ export class PropertyServiceClient {
   }
 
   findPropertiesForUniversity(universityId){
-    return fetch(this.URL + 'property/'+universityId,
+    return fetch(this.URL + 'property/university/'+universityId,
     )
       .then(response => response.json());
   }
 
-    findUserById(userId) {
-        return fetch(this.URL + 'user/' + userId)
+    findPropertyById(propertyId) {
+        return fetch(this.URL + 'property/' + propertyId)
             .then(response => response.json());
     }
 
-    login(username, password) {
-        const credentials = {
-            username: username,
-            password: password
-        };
-        return fetch(this.URL + 'login', {
-            method: 'post',
-            body: JSON.stringify(credentials),
-            credentials: 'include',
-            headers: {
-                'content-type': 'application/json'
-            }
-        }).then(response => response.json());
-    }
+  deleteProperty(propertyId){
+    return fetch(this.URL + 'property/' + propertyId, {
+      method: 'delete'
+    }).then(response => response.json());
+  }
 
-    logout() {
-        return fetch(this.URL + 'logout', {
-            method: 'post',
-            credentials: 'include'
-        });
-    }
-
-    profile() {
-        return fetch(this.URL + 'profile',
-            {
-                credentials: 'include', // include, same-origin, *omit
-            })
-            .then(response => response.json());
-    }
-
-    updateProfile(user) {
-        return fetch(this.URL + 'profile', {
-            body: JSON.stringify(user),
-            method: 'post',
-            credentials: 'include',
-            headers: {
-                'content-type': 'application/json'
-            }
-        })
-            .then(response => response.json());
-    }
-
-    findUserByUserName(username) {
-        return fetch(this.URL + 'user/' + username)
-            .then(response => response.json());
-    }
 
 
 }

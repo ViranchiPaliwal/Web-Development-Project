@@ -23,6 +23,9 @@ import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
 import {HttpClientModule} from "@angular/common/http";
 import {WishlistServiceClient} from "./services/wishlist.service.client";
+import { PropertDetailComponent } from './propert-detail/propert-detail.component';
+import { PropertyDetailComponent } from './property-detail/property-detail.component';
+import {InviteServiceClient} from "./services/invite.service.client";
 
 @NgModule({
   declarations: [
@@ -36,8 +39,8 @@ import {WishlistServiceClient} from "./services/wishlist.service.client";
     NavigationBarComponent,
     OwnerListingComponent,
     HomeTenantComponent,
-    HomeOwnerComponent
-
+    HomeOwnerComponent,
+    PropertyDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import {WishlistServiceClient} from "./services/wishlist.service.client";
   providers: [UserServiceClient,
               PropertyServiceClient,
               UniversityServiceClient,
+              InviteServiceClient,
               WishlistServiceClient],
   bootstrap: [AppComponent]
 })
