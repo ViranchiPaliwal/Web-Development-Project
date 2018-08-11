@@ -24,11 +24,13 @@ export class InviteServiceClient {
   }
 
   updateInvitationStatus(invite) {
-    const url = this.URL + 'invite/property';
+    const url = this.URL + 'invite/update';
     return fetch(url, {
       method: 'put',
       body: JSON.stringify(invite),
-      credentials: 'include'
+      headers: {
+        'content-type': 'application/json'
+      }
     })
       .then(response => response.json());
   }

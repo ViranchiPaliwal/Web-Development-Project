@@ -2,6 +2,8 @@
 <ul class="list-group">
   <li *ngFor="let property of propList"
       class="list-group-item">
+    <div routerLink="/owner/property/{{property._id}}">
       {{property.name}}
+    </div>
   </li>
 </ul>

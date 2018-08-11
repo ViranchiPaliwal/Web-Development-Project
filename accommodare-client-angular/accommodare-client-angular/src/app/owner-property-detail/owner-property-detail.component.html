@@ -1,3 +1,47 @@
-<p>
-  owner-property-detail works!
-</p>
+<div class="row">
+  <div class="col-4">
+    <ul class="list-group">
+      <li  *ngFor="let id of property.photoId"
+           class="list-group-item wbdv">
+        <cl-image
+          [public-id]=id
+          class="thumbnail inline"
+          width="300"
+          height="300"
+          crop="fit"
+          quality="80"
+          format="jpg"
+        >
+        </cl-image>
+      </li>
+    </ul>
+  </div>
+  <div class="col-8">
+    <div>{{property.type}}</div>
+    <div>{{property.address.street}}, {{property.address.city}}</div>
+    <div>{{property.name}}</div>
+    <div>{{property.price}}</div>
+    <div>Interested Tenant</div>
+    <ul class="list-group">
+      <li  *ngFor="let invite of invites"
+           class="list-group-item">
+        <div class="row" *ngIf="invite.status=='Pending'">
+        <div class="col-3">
+          <div>{{invite.user.username}}</div>
+        </div>
+          <div class="col-3">
+            <button class="btn btn-primary"  (click)="AcceptInvitation(invite.user._id)">Accept</button>
+          </div>
+          <div class="col-3">
+            <button class="btn btn-danger"  (click)="RejectInvitation(invite.user._id)">Reject</button>
+          </div>
+          <div class="col-3">
+            <a href="RejectInvitation()">View Tenant Profile</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+

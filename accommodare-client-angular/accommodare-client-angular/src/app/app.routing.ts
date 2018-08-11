@@ -7,6 +7,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {RegisterComponent} from "./register/register.component";
 import {OwnerListingComponent} from "./owner-listing/owner-listing.component";
 import {PropertyDetailComponent} from "./property-detail/property-detail.component";
+import {OwnerPropertyDetailComponent} from "./owner-property-detail/owner-property-detail.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'listing', component: OwnerListingComponent},
   {path: 'property/:propertyId', component: PropertyDetailComponent},
+  {path: 'owner/property/:propertyId', component: OwnerPropertyDetailComponent},
   {path: '**', component: HomeScreenComponent}
 ];
 export const routing = RouterModule.forRoot(appRoutes);
