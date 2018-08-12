@@ -25,23 +25,29 @@
     <!--<span class="sr-only">Next</span>-->
   <!--</a>-->
 <!--</div>-->
+
+<div class="container" *ngIf="user.role === role.Admin">
+<app-home-admin></app-home-admin>
+</div>
+
+<div *ngIf="user.role !== role.Admin">
 <ngb-carousel>
   <ng-template ngbSlide>
-    <img src="../../assets/img/image1.jpg" alt="Random first slide">
+    <img src="../../assets/img/image1.jpg" class="img-fluid" height="auto" alt="Random first slide">
     <div class="carousel-caption">
       <h3>Welcome to Accommodare</h3>
       <p>A place to rent and find accommodation for college students.</p>
     </div>
   </ng-template>
   <ng-template ngbSlide>
-    <img src="../../assets/img/image2.jpg" alt="Random second slide">
+    <img src="../../assets/img/image2.jpg" class="img-fluid" height="auto" alt="Random second slide">
     <div class="carousel-caption">
       <h3>Rent your apartment</h3>
       <p>Post your apartment for rent.</p>
     </div>
   </ng-template>
   <ng-template ngbSlide>
-    <img src="../../assets/img/image3.jpg" alt="Random third slide">
+    <img src="../../assets/img/image3.jpg" class="img-fluid" height="auto" alt="Random third slide">
     <div class="carousel-caption">
       <h3>Search apartment</h3>
       <p>Find apartment near your own university</p>
@@ -49,15 +55,21 @@
   </ng-template>
 </ngb-carousel>
 
-<div class="container" *ngIf="user.role === role.Owner">
-  <app-home-owner></app-home-owner>
+<div class="btn-group container-fluid parent" *ngIf="user.role === role.Owner">
+  <a routerLink="/listing"><button type="button" class="btn btn-outline-primary btn-lg btn-block">Posted Property</button></a>
+  <a routerLink="/property/new"> <button type="button" class="btn btn-outline-primary btn-lg btn-block">Add Property</button></a>
 </div>
-
-<div class="container" *ngIf="user.role === role.Tenant">
-<app-home-tenant></app-home-tenant>
+<div class="btn-group container-fluid parent" *ngIf="user.role === role.Tenant">
+  <a routerLink="/searchproperty"><button type="button" class="btn btn-outline-primary btn-lg btn-block">Search Property</button></a>
+  <a routerLink="/wishlist"><button type="button" class="btn btn-outline-primary btn-lg btn-block">Wishlist</button></a>
 </div>
-
-
-<div class="container" *ngIf="user.role === role.Admin">
-  <app-home-admin></app-home-admin>
 </div>
+<!--<div class="container" *ngIf="user.role === role.Owner">-->
+  <!--<app-home-owner></app-home-owner>-->
+<!--</div>-->
+
+<!--<div class="container" *ngIf="user.role === role.Tenant">-->
+<!--<app-home-tenant></app-home-tenant>-->
+<!--</div>-->
+
+

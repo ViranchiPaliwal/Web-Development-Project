@@ -12,6 +12,17 @@ export class PropertyServiceClient {
     });
   }
 
+  updateProperty(property) {
+    return fetch(this.URL + 'property', {
+      body: JSON.stringify(property),
+      credentials: 'include', // include, same-origin, *omit
+      method: 'put',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
   findPropertiesForOwner(){
     return fetch(this.URL + 'owner/property',{
         credentials: 'include'

@@ -1,7 +1,7 @@
 import {Component, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import {UniversityServiceClient} from "../services/university.service.client";
 import {UserServiceClient} from "../services/user.service.client";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Address} from "../models/address.model.client";
 import {University} from "../models/university.model.client";
 import {Property} from "../models/property.model.client";
@@ -10,6 +10,9 @@ import {User} from "../models/user.model.client";
 import {FileUploader, FileUploaderOptions, ParsedResponseHeaders} from "ng2-file-upload";
 import {Cloudinary} from "@cloudinary/angular-5.x";
 import {HttpClient} from "@angular/common/http";
+import {map, startWith} from "rxjs/operators";
+import {Observable} from "rxjs/index";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-home-owner',
@@ -28,7 +31,10 @@ export class HomeOwnerComponent implements OnInit {
               private cloudinary: Cloudinary,
               private zone: NgZone,
               private http: HttpClient,
-              private router: Router) {
+              private router: Router,
+              private route: ActivatedRoute) {
+     this.route.params.subscribe(
+    params => this.propertyId = params['propertyId']);
     this.responses = [];
     this.propertyTypes = ["Apartment", "House"]
     this.availTypes = ["Entire place", "Private Room", "Shared Room"]
@@ -36,6 +42,7 @@ export class HomeOwnerComponent implements OnInit {
 
   @ViewChild('autocomplete') autocomplete: any;
 
+  propertyId
   autocompleter;
   propertyTypes
   university
@@ -44,7 +51,11 @@ export class HomeOwnerComponent implements OnInit {
   property: Property = new Property()
   availTypes
   addressForm
+  isNew = true
   user: User = new User();
+  myControl = new FormControl();
+  filteredOptions: Observable<University> = new Observable<University>();
+
 
   ngOnInit() {
     this.property.address = new Address()
@@ -71,6 +82,16 @@ export class HomeOwnerComponent implements OnInit {
       this.property.address.zip = this.addressForm.postal_code
 
     });
+
+    if(this.propertyId!=='new'){
+      this.propertyService.findPropertyById(this.propertyId)
+        .then((property) => {
+          this.property = property
+          this.isNew = false;
+          this.university = property.university
+          this.myControl._onChange[0](this.university.Institution_Name)
+        });
+    }
 
     this.universityService.findAllUniversities()
       .then((universities) => {
@@ -172,6 +193,22 @@ export class HomeOwnerComponent implements OnInit {
           data: {}
         }
       );
+
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+  }
+
+  private _filter(value: string): object[] {
+    const filterValue = value.toLowerCase();
+
+    return this.universities.filter(option => {
+      if (option.name.toLowerCase().includes(filterValue)) {
+        return option;
+      }
+    })
   }
 
   cleanAddressForm() {
@@ -192,8 +229,23 @@ export class HomeOwnerComponent implements OnInit {
       );
   }
 
+  update() {
+    this.propertyService.updateProperty(this.property)
+      .then(() =>
+        this.router.navigate(['listing'])
+      );
+  }
+
+  delete() {
+    this.propertyService.deleteProperty(this.property._id)
+      .then(() =>
+        this.router.navigate(['listing'])
+      );
+  }
+
   autocompleteOwnerValueChange(selectedUniversity) {
     this.property.university = selectedUniversity.id;
+    this.university = selectedUniversity
   }
 
 

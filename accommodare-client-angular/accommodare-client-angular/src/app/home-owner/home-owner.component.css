@@ -1,3 +1,10 @@
 .profile-btn{
-  margin: 15px 0 10px 0;
+  margin: 15px 0px 15px 0px;
+}
+.propHeader{
+  text-align: center;
+  margin: 20px;
+}
+.address-component{
+  margin: 15px;
 }

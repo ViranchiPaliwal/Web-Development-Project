@@ -1,0 +1,18 @@
+.btn-primary-outline {
+border-radius: 10px;
+margin: 20px;
+}
+.btn-primary-outline:hover{
+  background: #007bff;
+}
+.parent{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  margin: 20px;
+}
+a {
+  text-decoration: none;
+}

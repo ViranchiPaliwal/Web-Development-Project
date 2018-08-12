@@ -8,25 +8,47 @@
   <ul class="list-group">
     <li *ngFor="let property of properties"
         class="list-group-item">
-      <div class="row" routerLink="/property/{{property._id}}">
+      <div class="row">
       <div class="col-4">
+        <div *ngIf="property.photoId.length==0">
+          <img src="../../assets/img/default-property.jpg" class="img-fluid">
+        </div>
+        <div *ngIf="property.photoId.length > 0" class="container-fluid">
         <cl-image
           [public-id]=property.photoId[0]
           class="thumbnail inline"
           width="300"
           height="300"
           crop="fit"
-          quality="80"
-          format="jpg"
         >
         </cl-image>
+        </div>
       </div>
         <div class="col-8">
-          <div>{{property.type}}</div>
-          <div>{{property.address.street}}, {{property.address.city}}</div>
-          <div>{{property.name}}</div>
-          <div>{{property.price}}</div>
-          <button class="btn btn-primary" *ngIf="checkAlreadyInWishList(property._id)" (click)="addToWishList(property._id)">Add to Wishlist</button>
+          <ul class="list-group">
+            <li class="list-group-item">
+            <div>Type: {{property.type}}</div>
+            </li>
+            <li class="list-group-item">
+              <div>Availability Type: {{property.availabilityType}}</div>
+            </li>
+            <li class="list-group-item">
+            <div>Address: {{property.address.number}} {{property.address.street}} {{property.address.city}} {{property.address.zip}}</div>
+            </li>
+            <li class="list-group-item">
+            <div>Price: ${{property.price}}</div>
+            </li>
+            <li class="list-group-item">
+              <div>Rooms: ${{property.rooms}}</div>
+            </li>
+            <li class="list-group-item">
+              <div>Size: ${{property.size}} sqft</div>
+            </li>
+            <li class="list-group-item btn-group btn-parent">
+            <button class="btn btn-primary" *ngIf="checkAlreadyInWishList(property._id)" (click)="addToWishList(property._id)">Add to Wishlist</button>
+             <button class="btn btn-success" routerLink="/propertyy/{{property._id}}">View Details</button>
+            </li>
+          </ul>
         </div>
       </div>
     </li>

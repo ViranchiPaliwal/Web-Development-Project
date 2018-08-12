@@ -1,25 +1,26 @@
+<app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
 <div class="container">
-  <h2 class="register-component">Property Details</h2>
+  <h1 class="address-component propHeader">Property Details</h1>
 
   <div class="row">
     <div class="col-4">
       <ul class="list-group">
         <li  *ngFor="let id of property.photoId"
             class="list-group-item wbdv">
+          <div class="container-fluid">
           <cl-image
             [public-id]=id
             class="thumbnail inline"
             width="300"
             height="300"
             crop="fit"
-            quality="80"
-            format="jpg"
           >
           </cl-image>
+          </div>
         </li>
       </ul>
       <div *ngIf="property.photoId.length==0">
-        <img src="../../assets/img/default-property.jpg" height="300" width="300">
+        <img src="../../assets/img/default-property.jpg" class="img-fluid" height="auto">
       </div>
       <button (click)="fileInput.click()" class="btn btn-success btn-block profile-btn">Upload</button>
       <span
@@ -27,16 +28,6 @@
      <input type="file" id="fileupload" #fileInput ng2FileSelect [uploader]="uploader" (change)="fileInput.value=''"
             multiple/>
     </span>
-      <div class="file" *ngFor="let response of responses; let i = index">
-        <div class="status">
-          Uploading... {{response.progress}}%
-          <div *ngIf="!response.status">In progress</div>
-          <div class="status-code" *ngIf="response.status">{{response.status}}</div>
-        </div>
-        <div class="progress-bar">
-          <div class="progress" role="progressbar" [style.width.%]="response.progress"></div>
-        </div>
-      </div>
     </div>
     <div class="col-8">
       <div class="form-group"> <!-- Street 1 -->
@@ -45,35 +36,47 @@
                placeholder="My Shadowbrook Guest House">
       </div>
 
-      <label for="owneruniversity">University</label>
-      <app-autocomplete id="owneruniversity" [valueChange]="autocompleteOwnerValueChange.bind(this)"
-                        [(options)]="universities"></app-autocomplete>
+      <div class="form-group">
+      <label class="control-label" for="owneruniversity">University</label>
+        <input id="owneruniversity" class="form-control" type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete  #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name" (onSelectionChange)="autocompleteOwnerValueChange(option)">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
 
-      <label for="propType">Type of place</label>
-      <select id="propType" class='form-control register-component' required [(ngModel)]='property.type'>
+      <div class="form-group">
+      <label class="control-label" for="propType">Type of place</label>
+      <select id="propType" class='form-control' required [(ngModel)]='property.type'>
         <option class='aptType' *ngFor='let type of propertyTypes' [value]="type">{{type}}</option>
       </select>
+      </div>
 
-
+      <div class="form-group">
       <label for="availablity">Availablity</label>
-      <select id="availablity" class='form-control register-component' required [(ngModel)]='property.availabilityType'>
+      <select id="availablity" class='form-control' required [(ngModel)]='property.availabilityType'>
         <option class='availType' *ngFor='let availType of availTypes' [value]="availType">{{availType}}</option>
       </select>
+      </div>
 
-
+      <div class="form-group">
       <label for="price">Price (In $)</label>
       <input id="price"
              type="number"
              [(ngModel)]="property.price"
              placeholder="1200"
              class="form-control profile-input"/>
+      </div>
 
+      <div class="form-group">
       <label for="rooms">Number of Rooms</label>
       <input id="rooms"
              type="number"
              [(ngModel)]="property.rooms"
              placeholder="Number of Rooms Ex: 4"
              class="form-control profile-input"/>
+      </div>
 
       <div class="form-group"> <!-- Street 1 -->
         <label for="autocomplete" class="control-label">Street Address</label>
@@ -111,22 +114,34 @@
                placeholder="#####">
       </div>
 
-      <label for="description">Description</label>
+      <div class="form-group">
+      <label for="description" class="control-label">Description</label>
       <input id="description"
              [(ngModel)]="property.description"
              placeholder="About your place"
-             class="form-control register-component"/>
+             class="form-control"/>
+      </div>
 
-      <label for="size">Size</label>
+      <div class="form-group">
+      <label for="size" class="control-label">Size</label>
       <input id="size"
              [(ngModel)]="property.size"
              placeholder="in sq ft Example: 1200"
              type="Number"
-             class="form-control register-component"/>
+             class="form-control"/>
+      </div>
 
-      <button (click)="submit()"
-              class="btn btn-primary btn-block register-component">
+      <button *ngIf="isNew" (click)="submit()"
+              class="btn btn-primary btn-block profile-btn">
         Submit
+      </button>
+      <button *ngIf="!isNew" (click)="update()"
+              class="btn btn-success btn-block profile-btn">
+        Update
+      </button>
+      <button *ngIf="!isNew" (click)="delete()"
+              class="btn btn-danger btn-block profile-btn">
+        Delete
       </button>
     </div>
   </div>
