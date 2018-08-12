@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Property} from "../models/property.model.client";
 import {University} from "../models/university.model.client";
 import {PropertyServiceClient} from "../services/property.service.client";
+import {USER_ROLE} from "../enums/userRole";
 
 @Component({
   selector: 'app-tenant-wishlist',
@@ -30,8 +31,27 @@ export class TenantWishlistComponent implements OnInit {
   wishList
   tenantId
   isAdmin = false
+  isLoggedIn = false
+  isAnonymous
+  isTenant = false
+  isOwner = false
+  role = USER_ROLE
+  user
   ngOnInit() {
-  this.findWishListedPropertiesForUser();
+    this.userService.profile()
+      .then(user => {
+        if (!user.invalid&&user.role!=this.role.Owner) {
+          this.user = user;
+          this.isLoggedIn = true;
+          if(user.role===this.role.Tenant){
+            this.isTenant = true;
+          }
+        } else {
+          alert('Invalid user or your session has expired. Kindly login.');
+          this.router.navigate(['login']);
+        }
+      });
+    this.findWishListedPropertiesForUser();
   if(this.tenantId!='self'){
     this.isAdmin = true
   }

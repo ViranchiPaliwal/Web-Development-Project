@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '@angular/common/http';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
+import {USER_ROLE} from "../enums/userRole";
 
 @Component({
     selector: 'app-profile',
@@ -27,26 +28,33 @@ export class ProfileComponent implements OnInit {
         this.route.params.subscribe(
         params => this.userId = params['userId']);
   this.responses = [];
-  this.title = '';
-
+  this.title = ''
     }
 
     user: User = new User();
     enrollments = [];
     isLoggedIn = false;
     isAdmin = false;
-    userId
-
+    userId;
+    isTenant = false;
+    isOwner = false;
+    role = USER_ROLE;
     ngOnInit() {
         this.service.profile()
             .then(user => {
                 if (!user.invalid) {
-                    if (user.role === 'Admin') {
+                    if (user.role === 'Admin' && this.userId!='self') {
                         this.isAdmin = true;
                         this.findUserById()
                     }
                     else{
                       this.user = user;
+                      if(user.role===this.role.Tenant){
+                        this.isTenant = true;
+                      }
+                      if(user.role===this.role.Owner){
+                        this.isOwner = true;
+                      }
                     }
                     this.isLoggedIn = true;
                 } else {
@@ -159,12 +167,18 @@ export class ProfileComponent implements OnInit {
         if(this.isAdmin){
           this.service
             .updateProfile(this.user)
-            .then(() => this.findUserById());
+            .then(() => {
+              alert('Profile successfully updated.')
+              this.findUserById()
+            });
         }
         else {
           this.service
             .updateProfile(this.user)
-            .then(() => this.getProfile());
+            .then(() => {
+              alert('Profile successfully updated.')
+              this.getProfile()
+            });
         }
     }
 
@@ -175,7 +189,7 @@ export class ProfileComponent implements OnInit {
   deleteProfile() {
     this.service
       .deleteProfile(this.user)
-      .then(this.router.navigate(['login']));
+      .then(() => this.router.navigate(['login']))
   }
 
   findUserById(){

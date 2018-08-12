@@ -13,6 +13,7 @@ import {HttpClient} from "@angular/common/http";
 import {map, startWith} from "rxjs/operators";
 import {Observable} from "rxjs/index";
 import {FormControl} from "@angular/forms";
+import {USER_ROLE} from "../enums/userRole";
 
 @Component({
   selector: 'app-home-owner',
@@ -55,8 +56,11 @@ export class HomeOwnerComponent implements OnInit {
   user: User = new User();
   myControl = new FormControl();
   filteredOptions: Observable<University> = new Observable<University>();
-
-
+  isLoggedIn = false
+  isAnonymous
+  isTenant = false
+  isOwner = false
+  role = USER_ROLE
   ngOnInit() {
     this.property.address = new Address()
     this.autocompleter = new google.maps.places.Autocomplete(
@@ -82,6 +86,20 @@ export class HomeOwnerComponent implements OnInit {
       this.property.address.zip = this.addressForm.postal_code
 
     });
+
+    this.userService.profile()
+      .then(user => {
+        if (!user.invalid&&user.role!=this.role.Tenant) {
+          this.user = user;
+          this.isLoggedIn = true;
+          if(user.role===this.role.Owner){
+            this.isOwner = true;
+          }
+        } else {
+          alert('Invalid user or your session has expired. Kindly login.');
+          this.router.navigate(['login']);
+        }
+      });
 
     if(this.propertyId!=='new'){
       this.propertyService.findPropertyById(this.propertyId)

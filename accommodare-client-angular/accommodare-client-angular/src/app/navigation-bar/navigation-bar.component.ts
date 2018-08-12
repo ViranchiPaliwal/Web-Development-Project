@@ -4,25 +4,27 @@ import {Router} from '@angular/router';
 
 
 @Component({
-    selector: 'app-navigation-bar',
-    templateUrl: './navigation-bar.component.html',
-    styleUrls: ['./navigation-bar.component.css']
+  selector: 'app-navigation-bar',
+  templateUrl: './navigation-bar.component.html',
+  styleUrls: ['./navigation-bar.component.css']
 })
 export class NavigationBarComponent implements OnInit {
 
-    constructor(private service: UserServiceClient, private router: Router) {
-    }
+  constructor(private service: UserServiceClient, private router: Router) {
+  }
 
-    @Input() isLoggedIn: false;
-    @Input() isAdmin: false;
+  @Input() isLoggedIn: false;
+  @Input() isAdmin: false;
+  @Input() isOwner: false;
+  @Input() isTenant: false;
 
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
-    logout() {
-        this.service.logout()
-            .then(() => this.router.navigate(['login']));
-    }
+  logout() {
+    this.service.logout()
+      .then(() => this.router.navigate(['login']));
+  }
 
 }

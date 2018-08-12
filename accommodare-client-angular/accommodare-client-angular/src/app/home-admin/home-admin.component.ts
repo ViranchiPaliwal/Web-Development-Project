@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {PropertyServiceClient} from "../services/property.service.client";
 import {UserServiceClient} from "../services/user.service.client";
 import {Router} from "@angular/router";
+import {User} from "../models/user.model.client";
+import {WishlistServiceClient} from "../services/wishlist.service.client";
 
 @Component({
   selector: 'app-home-admin',
@@ -12,6 +14,8 @@ export class HomeAdminComponent implements OnInit {
 
   constructor(private service: PropertyServiceClient,
               private userService: UserServiceClient,
+              private propService: PropertyServiceClient,
+              private wishService: WishlistServiceClient,
               private router: Router) {
 
   }
@@ -20,7 +24,23 @@ export class HomeAdminComponent implements OnInit {
   owners
   tenants
   user
+  newuser: User = new User()
+  userTypes
+  isUsernameExist = false
+  properties
+  wishUser
+  wishProp
   ngOnInit() {
+    this.findAllUsers()
+    this.propService.findAllProperties()
+      .then((prop) => {
+        this.properties = prop
+        console.log('success')
+      })
+    this.userTypes= ["Owner", "Tenant", "Admin"];
+  }
+
+  findAllUsers(){
     this.userService.findAllUsers()
       .then((users) => {
         this.allUser = users
@@ -40,5 +60,38 @@ export class HomeAdminComponent implements OnInit {
   wishlist(userId){
     this.router.navigate(['wishlist/',userId]);
   }
+
+  createUser() {
+    this.userService.findUserByUserName(this.newuser.username)
+      .then(user => {
+        if (user.invalid) {
+          this.isUsernameExist = false;
+          this.userService
+            .createUser(this.newuser)
+            .then(() => {
+            this.findAllUsers()
+            this.cleanNewUser()
+            })
+        } else {
+          this.isUsernameExist = true;
+        }
+      });
+  }
+
+  addToWishlist(){
+    console.log(this.wishUser)
+    console.log(this.wishProp)
+    this.wishService.addTenantPropertyToWishlist(this.wishUser,this.wishProp)
+  }
+
+  cleanNewUser(){
+    this.newuser.username='';
+    this.newuser.password='';
+  }
+
+  createProperty(){
+    this.router.navigate(['property/new']);
+  }
+
 
 }

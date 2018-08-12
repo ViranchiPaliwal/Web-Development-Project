@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark bg-primary navbar-expand-lg">
-    <a class="navbar-brand" href="#">Whiteboard</a>
+    <a class="navbar-brand" href="#">Accommodare</a>
 
     <div class="container-fluid">
         <ul class="navbar-nav mr-auto">
@@ -18,8 +18,14 @@
             <li class="nav-item active">
                 <a routerLink="/profile/self" *ngIf="isLoggedIn" class="nav-item nav-link active">Profile</a>
             </li>
-
+          <li class="nav-item active">
+            <a routerLink="/listing/self" *ngIf="isLoggedIn  && isOwner" class="nav-item nav-link active">MyPosting</a>
+          </li>
+          <li class="nav-item active">
+            <a routerLink="/wishlist/self" *ngIf="isLoggedIn  && isTenant" class="nav-item nav-link active">Wishlist</a>
+          </li>
         </ul>
+      <button (click)="logout()" *ngIf="isLoggedIn" class="btn btn-outline-light my-2 my-sm-0">Logout</button>
     </div>
 </nav>
 

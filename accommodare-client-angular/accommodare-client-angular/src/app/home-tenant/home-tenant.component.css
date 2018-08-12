@@ -1,4 +1,8 @@
 .btn-parent{
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
 }
+

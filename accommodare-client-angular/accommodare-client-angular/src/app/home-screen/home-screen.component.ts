@@ -15,34 +15,30 @@ import {map} from 'rxjs/operators';
 export class HomeScreenComponent implements OnInit {
 
   constructor(private userService: UserServiceClient,
-              private router: Router,
-              private _http: HttpClient) {
-
+              private router: Router) {
   }
-  images: Array<string>;
-
-  private _randomImageUrls(images: Array<{id: number}>): Array<string> {
-    return [1, 2, 3].map(() => {
-      const randomId = images[Math.floor(Math.random() * images.length)].id;
-      return `https://picsum.photos/900/500?image=${randomId}`;
-    });
-  }
-
   role = USER_ROLE
   user: User = new User();
   isLoggedIn = false;
-
+  isAnonymous = false;
+  isOwner = false;
+  isTenant = false;
   ngOnInit() {
-    this._http.get('https://picsum.photos/list')
-      .pipe(map((images: Array<{id: number}>) => this._randomImageUrls(images)))
-      .subscribe(images => this.images = images);
     this.userService.profile()
       .then(user => {
         if (!user.invalid) {
           this.user = user;
+          this.isAnonymous = false;
+          this.isLoggedIn = true;
+          if(user.role===this.role.Tenant){
+            this.isTenant = true;
+          }
+          if(user.role===this.role.Owner){
+            this.isOwner = true;
+          }
         } else {
-          alert('Invalid user or your session has expired. Kindly login.');
-          this.router.navigate(['login']);
+          this.isAnonymous = true;
+          this.isLoggedIn = false;
         }
       });
   }

@@ -31,6 +31,15 @@ export class PropertyServiceClient {
       .then(response => response.json());
   }
 
+  findAllProperties(){
+    return fetch(this.URL + 'property',{
+        credentials: 'include'
+      }
+    )
+      .then(response => response.json());
+  }
+
+
   findPropertiesForUniversity(universityId){
     return fetch(this.URL + 'property/university/'+universityId,
     )

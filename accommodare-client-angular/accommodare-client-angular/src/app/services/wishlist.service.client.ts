@@ -17,6 +17,14 @@ export class WishlistServiceClient {
     });
   }
 
+  addTenantPropertyToWishlist(tenantId, propertyId) {
+    const url = this.URL + 'tenant/'+tenantId+'/property/' + propertyId;
+    return fetch(url, {
+      method: 'post',
+      credentials: 'include'
+    });
+  }
+
   removePropertyFromWishlist(tenantId, propertyId) {
     const url = this.URL + 'tenant/'+tenantId+'/property/' + propertyId;
     return fetch(url, {

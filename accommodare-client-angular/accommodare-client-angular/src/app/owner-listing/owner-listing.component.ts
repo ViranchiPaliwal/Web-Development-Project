@@ -16,7 +16,11 @@ export class OwnerListingComponent implements OnInit {
     params => this.userId = params['userId']); }
   properties;
   userId;
+  isAdmin = false;
   ngOnInit() {
+    if(this.userId!='self'){
+      this.isAdmin=true
+    }
     this.service.findPropertiesForOwner(this.userId)
       .then((propList) =>
       this.properties = propList);

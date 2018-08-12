@@ -5,6 +5,7 @@ import {PropertyServiceClient} from "../services/property.service.client";
 import {InviteServiceClient} from "../services/invite.service.client";
 import {Invite} from "../models/invite.model.client";
 import {UserServiceClient} from "../services/user.service.client";
+import {USER_ROLE} from "../enums/userRole";
 
 @Component({
   selector: 'app-property-detail',
@@ -27,24 +28,30 @@ export class PropertyDetailComponent implements OnInit {
   invite: Invite = new Invite()
   isInterested
   user
-  isLoggedIn
-  isOwner
+  isOwner = false
   invites: Invite[]
+  isLoggedIn = false
+  isAnonymous
+  isTenant = false
+  role = USER_ROLE
 
   ngOnInit() {
     this.userService.profile()
       .then(user => {
-        if (!user.invalid || user.role==='Admin') {
+        if (!user.invalid && user.role!=='Admin') {
           this.user = user;
+          this.isLoggedIn = true
           this.service.findPropertyById(this.propertyId)
             .then((property) => this.property = property)
             .then(() =>{
               if (this.user.role === 'Owner') {
                 this.isOwner = true
+                this.isTenant = false
                 this.getInterestedTenant(this.propertyId)
               }
               else{
                 this.isOwner = false
+                this.isTenant = true
                 this.getInviteStatus(this.propertyId)
               }
             })
