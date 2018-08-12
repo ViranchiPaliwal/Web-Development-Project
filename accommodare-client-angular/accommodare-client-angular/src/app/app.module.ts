@@ -27,6 +27,7 @@ import { PropertDetailComponent } from './propert-detail/propert-detail.componen
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
 import {InviteServiceClient} from "./services/invite.service.client";
 import { OwnerPropertyDetailComponent } from './owner-property-detail/owner-property-detail.component';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { OwnerPropertyDetailComponent } from './owner-property-detail/owner-prop
     HomeTenantComponent,
     HomeOwnerComponent,
     PropertyDetailComponent,
-    OwnerPropertyDetailComponent
+    OwnerPropertyDetailComponent,
+    ViewProfileComponent
   ],
   imports: [
     BrowserModule,

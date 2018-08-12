@@ -6,3 +6,8 @@
 <div class="container" *ngIf="user.role === role.Tenant">
 <app-home-tenant></app-home-tenant>
 </div>
+
+
+<div class="container" *ngIf="user.role === role.Admin">
+  <app-home-tenant></app-home-tenant>
+</div>

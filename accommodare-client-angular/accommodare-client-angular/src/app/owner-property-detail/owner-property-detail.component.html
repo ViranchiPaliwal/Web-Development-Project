@@ -36,7 +36,7 @@
             <button class="btn btn-danger"  (click)="RejectInvitation(invite.user._id)">Reject</button>
           </div>
           <div class="col-3">
-            <a href="RejectInvitation()">View Tenant Profile</a>
+            <a href="RejectInvitation()" routerLink="/viewprofile/{{invite.user.name}}">View Tenant Profile</a>
           </div>
         </div>
       </li>

@@ -8,6 +8,7 @@ import {RegisterComponent} from "./register/register.component";
 import {OwnerListingComponent} from "./owner-listing/owner-listing.component";
 import {PropertyDetailComponent} from "./property-detail/property-detail.component";
 import {OwnerPropertyDetailComponent} from "./owner-property-detail/owner-property-detail.component";
+import {ViewProfileComponent} from "./view-profile/view-profile.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'viewprofile/:username', component: ViewProfileComponent},
   {path: 'listing', component: OwnerListingComponent},
   {path: 'property/:propertyId', component: PropertyDetailComponent},
   {path: 'owner/property/:propertyId', component: OwnerPropertyDetailComponent},

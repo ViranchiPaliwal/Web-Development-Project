@@ -22,7 +22,6 @@ export class OwnerPropertyDetailComponent implements OnInit {
   property: Property = new Property()
   propertyId
   invites: Invite[]
-  isInterested
 
   ngOnInit() {
     this.service.findPropertyById(this.propertyId)
