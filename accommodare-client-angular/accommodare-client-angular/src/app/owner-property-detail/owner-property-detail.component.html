@@ -22,25 +22,7 @@
     <div>{{property.name}}</div>
     <div>{{property.price}}</div>
     <div>Interested Tenant</div>
-    <ul class="list-group">
-      <li  *ngFor="let invite of invites"
-           class="list-group-item">
-        <div class="row" *ngIf="invite.status=='Pending'">
-        <div class="col-3">
-          <div>{{invite.user.username}}</div>
-        </div>
-          <div class="col-3">
-            <button class="btn btn-primary"  (click)="AcceptInvitation(invite.user._id)">Accept</button>
-          </div>
-          <div class="col-3">
-            <button class="btn btn-danger"  (click)="RejectInvitation(invite.user._id)">Reject</button>
-          </div>
-          <div class="col-3">
-            <a href="RejectInvitation()" routerLink="/viewprofile/{{invite.user.name}}">View Tenant Profile</a>
-          </div>
-        </div>
-      </li>
-    </ul>
+
   </div>
 
 </div>

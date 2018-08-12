@@ -1,8 +1,8 @@
 export class WishlistServiceClient {
     URL = 'http://localhost:4000/api/';
 
-  findWishListedPropertiesForUser() {
-    const url = this.URL + 'tenant/property';
+  findWishListedPropertiesForUser(tenanId) {
+    const url = this.URL + 'tenant/property/'+tenanId;
     return fetch(url, {
       credentials: 'include'
     })
@@ -17,8 +17,8 @@ export class WishlistServiceClient {
     });
   }
 
-  removePropertyFromWishlist(propertyId) {
-    const url = this.URL + 'tenant/property/' + propertyId;
+  removePropertyFromWishlist(tenantId, propertyId) {
+    const url = this.URL + 'tenant/'+tenantId+'/property/' + propertyId;
     return fetch(url, {
       method: 'delete',
       credentials: 'include'

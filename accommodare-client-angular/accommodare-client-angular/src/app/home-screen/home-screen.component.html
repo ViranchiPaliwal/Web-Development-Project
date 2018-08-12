@@ -56,12 +56,12 @@
 </ngb-carousel>
 
 <div class="btn-group container-fluid parent" *ngIf="user.role === role.Owner">
-  <a routerLink="/listing"><button type="button" class="btn btn-outline-primary btn-lg btn-block">Posted Property</button></a>
+  <a routerLink="/listing/self"><button type="button" class="btn btn-outline-primary btn-lg btn-block">Posted Property</button></a>
   <a routerLink="/property/new"> <button type="button" class="btn btn-outline-primary btn-lg btn-block">Add Property</button></a>
 </div>
 <div class="btn-group container-fluid parent" *ngIf="user.role === role.Tenant">
   <a routerLink="/searchproperty"><button type="button" class="btn btn-outline-primary btn-lg btn-block">Search Property</button></a>
-  <a routerLink="/wishlist"><button type="button" class="btn btn-outline-primary btn-lg btn-block">Wishlist</button></a>
+  <a routerLink="/wishlist/self"><button type="button" class="btn btn-outline-primary btn-lg btn-block">Wishlist</button></a>
 </div>
 </div>
 <!--<div class="container" *ngIf="user.role === role.Owner">-->

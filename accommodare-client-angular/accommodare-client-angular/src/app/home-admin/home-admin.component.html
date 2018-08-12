@@ -27,12 +27,12 @@
       {{user.username}}
     </td>
     <td>
-    <button class="col-4 btn-primary">
+    <button (click)="profile(user._id)"  class="col-4 btn-primary">
     Profile
     </button>
     </td>
     <td>
-      <button class="col-4 btn-success">
+      <button (click)="apartments(user._id)" class="col-4 btn-success">
         Apartments
       </button>
     </td>
@@ -54,12 +54,12 @@
         {{user.username}}
       </td>
       <td>
-        <button class="col-4 btn-primary">
+        <button (click)="profile(user._id)" class="col-4 btn-primary">
           Profile
         </button>
       </td>
       <td>
-        <button class="col-4 btn-success">
+        <button (click)="wishlist(user._id)" class="col-4 btn-success">
           Wishlist
         </button>
       </td>

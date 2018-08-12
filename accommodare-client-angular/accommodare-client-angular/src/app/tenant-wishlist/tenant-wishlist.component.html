@@ -1,31 +1,23 @@
-<app-navigation-bar [isLoggedIn]="true"></app-navigation-bar>
-<!--<ul class="list-group">-->
-  <!--<li *ngFor="let property of propList"-->
-      <!--class="list-group-item">-->
-    <!--<div routerLink="/propertydetail/{{property._id}}">-->
-      <!--{{property.name}}-->
-    <!--</div>-->
-  <!--</li>-->
-<!--</ul>-->
+<app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
 <ul class="list-group">
   <li *ngFor="let property of properties"
       class="list-group-item">
     <div class="row">
       <div class="col-4">
-        <div *ngIf="property.photoId.length==0">
-          <img src="../../assets/img/default-property.jpg" class="img-fluid">
-        </div>
-        <div *ngIf="property.photoId.length > 0" class="container-fluid">
-          <cl-image
-            [public-id]=property.photoId[0]
-            class="thumbnail inline"
-            width="300"
-            height="300"
-            crop="fit"
-          >
-          </cl-image>
-        </div>
+      <div *ngIf="property.photoId.length==0">
+        <img src="../../assets/img/default-property.jpg" class="img-fluid">
       </div>
+      <div *ngIf="property.photoId.length > 0" class="container-fluid">
+        <cl-image
+          [public-id]=property.photoId[0]
+          class="thumbnail inline"
+          width="300"
+          height="300"
+          crop="fit"
+        >
+        </cl-image>
+      </div>
+    </div>
       <div class="col-8">
         <ul class="list-group">
           <li class="list-group-item">
@@ -47,8 +39,8 @@
             <div>Size: ${{property.size}} sqft</div>
           </li>
           <li class="list-group-item btn-group btn-parent">
-            <button class="btn btn-primary" (click)="editProperty(property._id)">Edit</button>
-            <button class="btn btn-success" routerLink="/propertydetail/{{property._id}}">View Details</button>
+            <button *ngIf="!isAdmin" class="btn btn-success" routerLink="/propertydetail/{{property._id}}">View Details</button>
+            <button class="btn btn-danger"  (click)="deleteFromWishList(property._id)">Remove</button>
           </li>
         </ul>
       </div>

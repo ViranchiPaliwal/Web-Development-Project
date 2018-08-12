@@ -1,3 +1,4 @@
+<app-navigation-bar [isLoggedIn]="isLoggedIn"></app-navigation-bar>
 <div class="container">
   <h2 class="register-component">Search Property</h2>
   <label for="universit">University</label>
@@ -46,7 +47,7 @@
             </li>
             <li class="list-group-item btn-group btn-parent">
             <button class="btn btn-primary" *ngIf="checkAlreadyInWishList(property._id)" (click)="addToWishList(property._id)">Add to Wishlist</button>
-             <button class="btn btn-success" routerLink="/propertyy/{{property._id}}">View Details</button>
+             <button class="btn btn-success" routerLink="/propertydetail/{{property._id}}">View Details</button>
             </li>
           </ul>
         </div>

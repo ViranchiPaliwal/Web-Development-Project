@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, NgZone} from '@angular/core';
 import {User} from '../models/user.model.client';
 import {UserServiceClient} from '../services/user.service.client';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '@angular/common/http';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
@@ -22,8 +22,10 @@ export class ProfileComponent implements OnInit {
                 private router: Router,
                 private cloudinary: Cloudinary,
                 private zone: NgZone,
-                private http: HttpClient
-    ) {
+                private http: HttpClient,
+                private route: ActivatedRoute) {
+        this.route.params.subscribe(
+        params => this.userId = params['userId']);
   this.responses = [];
   this.title = '';
 
@@ -33,14 +35,18 @@ export class ProfileComponent implements OnInit {
     enrollments = [];
     isLoggedIn = false;
     isAdmin = false;
+    userId
 
     ngOnInit() {
         this.service.profile()
             .then(user => {
                 if (!user.invalid) {
-                    this.user = user;
-                    if (this.user.username === 'admin') {
+                    if (user.role === 'Admin') {
                         this.isAdmin = true;
+                        this.findUserById()
+                    }
+                    else{
+                      this.user = user;
                     }
                     this.isLoggedIn = true;
                 } else {
@@ -150,9 +156,16 @@ export class ProfileComponent implements OnInit {
 
 
     updateProfile() {
-        this.service
+        if(this.isAdmin){
+          this.service
+            .updateProfile(this.user)
+            .then(() => this.findUserById());
+        }
+        else {
+          this.service
             .updateProfile(this.user)
             .then(() => this.getProfile());
+        }
     }
 
     uploadImage() {
@@ -161,8 +174,13 @@ export class ProfileComponent implements OnInit {
 
   deleteProfile() {
     this.service
-      .deleteProfile()
+      .deleteProfile(this.user)
       .then(this.router.navigate(['login']));
+  }
+
+  findUserById(){
+    this.service.findUserById(this.userId)
+      .then((user) => this.user = user)
   }
 
 

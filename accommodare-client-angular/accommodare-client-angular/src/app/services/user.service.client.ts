@@ -26,10 +26,14 @@ export class UserServiceClient {
         }).then(response => response.json());
     }
 
-  deleteProfile(){
+  deleteProfile(user){
       return fetch(this.URL + 'profile', {
+        body: JSON.stringify(user),
         method: 'delete',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+          'content-type': 'application/json'
+        }
       }).then(response => response.json());
     }
 
@@ -61,7 +65,7 @@ export class UserServiceClient {
     }
 
     findUserByUserName(username) {
-        return fetch(this.URL + 'user/' + username)
+        return fetch(this.URL + 'user/username/' + username)
             .then(response => response.json());
     }
 

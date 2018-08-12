@@ -1,8 +1,12 @@
-<div class="row">
-  <div class="col-4">
+<div>
+  <div class="propertyImg">
+    <div *ngIf="property.photoId.length==0" class="container-fluid">
+      <img src="../../assets/img/default-property.jpg" class="img-fluid">
+    </div>
+    <div *ngIf="property.photoId.length > 0" class="container-fluid">
     <ul class="list-group">
-      <li  *ngFor="let id of property.photoId"
-           class="list-group-item wbdv">
+      <li *ngFor="let id of property.photoId"
+          class="list-group-item wbdv">
         <cl-image
           [public-id]=id
           class="thumbnail inline"
@@ -15,20 +19,111 @@
         </cl-image>
       </li>
     </ul>
-  </div>
-  <div class="col-8">
-    <div>{{property.type}}</div>
-    <div>{{property.address.street}}, {{property.address.city}}</div>
-    <div>{{property.name}}</div>
-    <div>{{property.price}}</div>
-    <div *ngIf="!isInterested">
-      <button class="btn btn-primary"  (click)="addToInvite(property._id)">Interested</button>
-    </div>
-    <div *ngIf="isInterested">
-      <button class="btn btn-primary"  (click)="removeFromInvite(property._id)">Not Interested</button>
-      <div>Invitation Status</div>
-      <div>{{invite.status}}</div>
     </div>
   </div>
+  <table class="table table-striped propTable table-bordered">
+    <tbody>
+    <tr>
+      <td>
+        Name
+      </td>
+      <td>
+        {{property.name}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        University
+      </td>
+      <td>
+        {{property.university.Institution_Name}}
+      </td>
+    </tr>
 
+    <tr>
+      <td>
+        Type
+      </td>
+      <td>
+        {{property.availabilityType}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Address
+      </td>
+      <td>
+        {{property.address.number}} {{property.address.street}} {{property.address.city}}
+        {{property.address.zip}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Price
+      </td>
+      <td>
+        ${{property.price}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Rooms
+      </td>
+      <td>
+        {{property.rooms}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Size
+      </td>
+      <td>
+        {{property.size}} sqft
+      </td>
+    </tr>
+    <tr *ngIf="!isOwner && isInterested">
+      <td>
+        Invitation Status
+      </td>
+      <td>
+        {{invite.status}}
+      </td>
+    </tr>
+    <tr *ngIf="!isOwner && isInterested && invite.status == 'Accept'">
+      <td>
+        Owner Profile
+      </td>
+      <td>
+        <a  routerLink="/viewprofile/{{property.owner}}">View Owner Profile to contact</a>
+    </tr>
+
+    <tr>
+    <td colspan="2" *ngIf="!isOwner && !isInterested">
+        <button class="btn btn-primary" (click)="addToInvite(property._id)">Interested</button>
+    </td>
+    <td colspan="2" *ngIf="!isOwner && isInterested">
+        <button class="btn btn-primary" (click)="removeFromInvite(property._id)">Not Interested</button>
+    </td>
+    </tr>
+    </tbody>
+  </table>
+  <ul *ngIf="isOwner" class="list-group">
+    <li  *ngFor="let invite of invites"
+         class="list-group-item">
+      <div class="row" *ngIf="invite.status=='Pending'">
+        <div class="col-3">
+          <div>{{invite.user.username}}</div>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-primary"  (click)="AcceptInvitation(invite.user._id)">Accept</button>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-danger"  (click)="RejectInvitation(invite.user._id)">Reject</button>
+        </div>
+        <div class="col-3">
+          <a  routerLink="/viewprofile/{{invite.user.name}}">View Tenant Profile</a>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

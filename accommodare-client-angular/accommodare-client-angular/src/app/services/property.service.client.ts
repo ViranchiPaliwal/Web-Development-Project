@@ -23,8 +23,8 @@ export class PropertyServiceClient {
     });
   }
 
-  findPropertiesForOwner(){
-    return fetch(this.URL + 'owner/property',{
+  findPropertiesForOwner(userId){
+    return fetch(this.URL + 'owner/property/'+userId,{
         credentials: 'include'
       }
       )

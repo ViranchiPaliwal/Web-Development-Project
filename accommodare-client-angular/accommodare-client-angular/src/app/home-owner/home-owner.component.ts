@@ -225,21 +225,22 @@ export class HomeOwnerComponent implements OnInit {
   submit() {
     this.propertyService.createProperty(this.property)
       .then(() =>
-        this.router.navigate(['listing'])
+        this.router.navigate(['listing/self'])
       );
   }
 
   update() {
     this.propertyService.updateProperty(this.property)
       .then(() =>
-        this.router.navigate(['listing'])
+          this.propertyService.findPropertyById(this.propertyId)
+            .then((property) => this.property = property);
       );
   }
 
   delete() {
     this.propertyService.deleteProperty(this.property._id)
       .then(() =>
-        this.router.navigate(['listing'])
+        this.router.navigate(['listing/self'])
       );
   }
 

@@ -11,22 +11,22 @@ import {OwnerPropertyDetailComponent} from "./owner-property-detail/owner-proper
 import {ViewProfileComponent} from "./view-profile/view-profile.component";
 import {HomeOwnerComponent} from "./home-owner/home-owner.component";
 import {HomeTenantComponent} from "./home-tenant/home-tenant.component";
+import {TenantWishlistComponent} from "./tenant-wishlist/tenant-wishlist.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeScreenComponent},
   {path: 'autocomplete', component: AutocompleteComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'home', component: HomeScreenComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'profile', component: ProfileComponent},
+  {path: 'profile/:userId', component: ProfileComponent},
   {path: 'viewprofile/:username', component: ViewProfileComponent},
-  {path: 'listing', component: OwnerListingComponent},
+  {path: 'listing/:userId', component: OwnerListingComponent},
   {path: 'property/:propertyId', component:HomeOwnerComponent},
   {path: 'searchproperty', component:HomeTenantComponent},
-  {path: 'wishlist', component:HomeTenantComponent},
-  {path: 'propertyy/:propertyId', component: PropertyDetailComponent},
+  {path: 'wishlist/:tenantId', component:TenantWishlistComponent},
+  {path: 'propertydetail/:propertyId', component: PropertyDetailComponent},
   {path: 'owner/property/:propertyId', component: OwnerPropertyDetailComponent},
   {path: '**', component: HomeScreenComponent}
 ];
