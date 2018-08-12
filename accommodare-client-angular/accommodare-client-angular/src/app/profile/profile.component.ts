@@ -171,34 +171,4 @@ export class ProfileComponent implements OnInit {
     this.title = value;
   }
 
-  // Delete an uploaded image
-  // Requires setting "Return delete token" to "Yes" in your upload preset configuration
-  // See also https://support.cloudinary.com/hc/en-us/articles/202521132-How-to-delete-an-image-from-the-client-side-
-  deleteImage = function (data: any, index: number) {
-    const url = `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/delete_by_token`;
-    const headers = new Headers({ 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' });
-    const options = { headers: headers };
-    const body = {
-      token: data.delete_token
-    };
-    this.http.post(url, body, options).subscribe(response => {
-      console.log(`Deleted image - ${data.public_id} ${response.result}`);
-      // Remove deleted item for responses
-      this.responses.splice(index, 1);
-    });
-  };
-
-  fileOverBase(e: any): void {
-    this.hasBaseDropZoneOver = e;
-  }
-
-  getFileProperties(fileProperties: any) {
-    // Transforms Javascript Object to an iterable to be used by *ngFor
-    if (!fileProperties) {
-      return null;
-    }
-    return Object.keys(fileProperties)
-      .map((key) => ({ 'key': key, 'value': fileProperties[key] }));
-  }
-
 }

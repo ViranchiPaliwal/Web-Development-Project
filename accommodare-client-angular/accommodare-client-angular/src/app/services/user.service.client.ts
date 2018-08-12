@@ -6,6 +6,11 @@ export class UserServiceClient {
             .then(response => response.json());
     }
 
+  findAllUsers(){
+    return fetch(this.URL + 'user')
+      .then(response => response.json());
+  }
+
     login(username, password) {
         const credentials = {
             username: username,

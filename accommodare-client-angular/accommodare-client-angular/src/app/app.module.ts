@@ -23,12 +23,12 @@ import { CloudinaryModule } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
 import {HttpClientModule} from "@angular/common/http";
 import {WishlistServiceClient} from "./services/wishlist.service.client";
-import { PropertDetailComponent } from './propert-detail/propert-detail.component';
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
 import {InviteServiceClient} from "./services/invite.service.client";
 import { OwnerPropertyDetailComponent } from './owner-property-detail/owner-property-detail.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
-
+import { HomeAdminComponent } from './home-admin/home-admin.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +44,8 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
     HomeOwnerComponent,
     PropertyDetailComponent,
     OwnerPropertyDetailComponent,
-    ViewProfileComponent
+    ViewProfileComponent,
+    HomeAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +56,7 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
     FormsModule,
     HttpClientModule,
     FileUploadModule,
+    NgbModule.forRoot(),
     CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'hssso26ip', upload_preset: 'wups8v99'}),
     routing
   ],

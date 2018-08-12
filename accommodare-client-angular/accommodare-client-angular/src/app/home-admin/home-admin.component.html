@@ -1,0 +1,113 @@
+<div *ngIf="isProfile">
+<h4>Profile</h4>
+<label for="name">Name</label>
+<input type="text" placeholder="Section Name" class="form-control admin-component" id="name" [(ngModel)]="name">
+<label for="seats">Available Seats</label>
+<input type="number" placeholder="Available Seats" class="form-control admin-component" id="seats"
+[(ngModel)]="seats">
+<button class="admin-btn-component btn btn-success btn-block" *ngIf="isEdit" (click)="update()">Update</button>
+<button class="admin-btn-component btn btn-primary btn-block" *ngIf="isAdd" (click)="delete()">Add</button>
+</div>
+<br/>
+
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>
+    All Owner
+    </th>
+  </tr>
+
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of owners">
+
+    <td>
+      {{user.username}}
+    </td>
+    <td>
+    <button class="col-4 btn-primary">
+    Profile
+    </button>
+    </td>
+    <td>
+      <button class="col-4 btn-success">
+        Apartments
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>
+        All Tenant
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of tenants">
+
+      <td>
+        {{user.username}}
+      </td>
+      <td>
+        <button class="col-4 btn-primary">
+          Profile
+        </button>
+      </td>
+      <td>
+        <button class="col-4 btn-success">
+          Wishlist
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+<!--<div class="container admin-component">-->
+  <!--<div *ngIf="isSection">-->
+    <!--<h4>Section</h4>-->
+    <!--<label for="name">Name</label>-->
+    <!--<input type="text" placeholder="Section Name" class="form-control admin-component" id="name" [(ngModel)]="name">-->
+    <!--<label for="seats">Available Seats</label>-->
+    <!--<input type="number" placeholder="Available Seats" class="form-control admin-component" id="seats"-->
+           <!--[(ngModel)]="seats">-->
+    <!--<button class="admin-btn-component btn btn-success btn-block" *ngIf="isEdit" (click)="update()">Update</button>-->
+    <!--<button class="admin-btn-component btn btn-primary btn-block" *ngIf="isAdd" (click)="addSection()">Add</button>-->
+  <!--</div>-->
+  <!--<br/>-->
+
+  <!--<table class="table">-->
+    <!--<thead>-->
+    <!--<tr *ngFor="let course of courses">-->
+      <!--<table class="table-bordered table-striped table">-->
+        <!--<thead>-->
+        <!--<tr class="table">-->
+          <!--<td><b>{{course.title}}</b>-->
+            <!--<button class="btn btn-primary float-right" (click)="add(course)">Add</button>-->
+          <!--</td>-->
+        <!--</tr>-->
+        <!--<tr class="table-active">-->
+          <!--<td>Section Name</td>-->
+          <!--<td>Available Seats</td>-->
+          <!--<td></td>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr *ngFor="let section of sections">-->
+          <!--<td *ngIf="section.courseId==course.id">{{section.name}}</td>-->
+          <!--<td *ngIf="section.courseId==course.id">{{section.seats}}</td>-->
+          <!--<td *ngIf="section.courseId==course.id">-->
+            <!--<button class="admin-component btn btn-primary" (click)="edit(section,course)">Edit</button>-->
+            <!--<button class="admin-component btn btn-primary" (click)="delete(section,course)">Delete</button>-->
+          <!--</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+      <!--</table>-->
+    <!--</tr>-->
+    <!--</thead>-->
+  <!--</table>-->
