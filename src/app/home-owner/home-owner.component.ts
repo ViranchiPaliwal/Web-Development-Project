@@ -25,7 +25,7 @@ export class HomeOwnerComponent implements OnInit {
   responses: Array<any>;
 
   private hasBaseDropZoneOver: boolean = false;
-  private uploader: FileUploader;
+  uploader: FileUploader;
   constructor(private propertyService: PropertyServiceClient,
               private userService: UserServiceClient,
               private universityService: UniversityServiceClient,

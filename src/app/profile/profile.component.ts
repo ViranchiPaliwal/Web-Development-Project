@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   responses: Array<any>;
 
   private hasBaseDropZoneOver: boolean = false;
-  private uploader: FileUploader;
+  uploader: FileUploader;
   private title: string;
     constructor(private service: UserServiceClient,
                 private router: Router,

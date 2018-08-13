@@ -23,7 +23,7 @@ export class PropertyDetailComponent implements OnInit {
       params => this.propertyId = params['propertyId']);
   }
 
-  property: Property = new Property()
+  property
   propertyId
   invite: Invite = new Invite()
   isInterested
