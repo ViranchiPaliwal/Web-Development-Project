@@ -22,10 +22,10 @@ export class ViewProfileComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {
     this.route.params.subscribe(
-      params => this.username = params['username']);
+      params => this.userId = params['userId']);
   }
 
-  username
+  userId
   user: User = new User();
   isLoggedIn = false;
   isAdmin = false;
@@ -37,7 +37,7 @@ export class ViewProfileComponent implements OnInit {
     this.service.profile()
       .then(user => {
         if (!user.invalid&&user.role!=this.role.Admin) {
-          this.user = user;
+          var user = user;
           this.isLoggedIn = true;
           if(user.role===this.role.Tenant){
             this.isTenant = true;
@@ -55,7 +55,7 @@ export class ViewProfileComponent implements OnInit {
 
   getProfile() {
     this.service
-      .findUserByUserName(this.username)
+      .findUserById(this.userId)
       .then(user =>
         this.user = user);
   }

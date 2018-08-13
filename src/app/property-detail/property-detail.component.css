@@ -3,9 +3,12 @@
   justify-content: center;
   align-items: center;
   align-content: center;
-  border:1px solid lightgray;
 }
 
+.ulStyle li{
+  display: inline;
+  margin:10px;
+}
 .propDetailImg{
   margin: 10px;
 }

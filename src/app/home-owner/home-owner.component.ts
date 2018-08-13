@@ -62,6 +62,7 @@ export class HomeOwnerComponent implements OnInit {
   isOwner = false
   role = USER_ROLE
   title
+  state
   ngOnInit() {
     this.property.address = new Address()
     this.autocompleter = new google.maps.places.Autocomplete(
@@ -82,6 +83,7 @@ export class HomeOwnerComponent implements OnInit {
       }
       this.property.address.number = this.addressForm.street_number
       this.property.address.street = this.addressForm.route
+      this.state = this.addressForm.administrative_area_level_1
       this.property.address.city = this.addressForm.locality
       this.property.address.state = this.addressForm.administrative_area_level_1
       this.property.address.zip = this.addressForm.postal_code

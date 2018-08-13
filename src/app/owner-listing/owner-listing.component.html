@@ -48,7 +48,7 @@
           </li>
           <li class="list-group-item btn-group btn-parent">
             <button class="btn btn-primary" (click)="editProperty(property._id)">Edit</button>
-            <button class="btn btn-success" routerLink="/propertydetail/{{property._id}}">View Details</button>
+            <button *ngIf="!isAdmin" class="btn btn-success" routerLink="/propertydetail/{{property._id}}">View Details</button>
           </li>
         </ul>
       </div>

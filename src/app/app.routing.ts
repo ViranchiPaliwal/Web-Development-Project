@@ -21,7 +21,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile/:userId', component: ProfileComponent},
-  {path: 'viewprofile/:username', component: ViewProfileComponent},
+  {path: 'viewprofile/:userId', component: ViewProfileComponent},
   {path: 'listing/:userId', component: OwnerListingComponent},
   {path: 'property/:propertyId', component:HomeOwnerComponent},
   {path: 'searchproperty', component:HomeTenantComponent},

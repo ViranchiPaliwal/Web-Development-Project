@@ -30,7 +30,7 @@
     </span>
     </div>
     <div class="col-8">
-      <div class="form-group"> <!-- Street 1 -->
+      <div class="form-group">
         <label for="name" class="control-label">Name</label>
         <input type="text" class="form-control" id="name" [(ngModel)]="property.name"
                placeholder="My Shadowbrook Guest House">
@@ -78,37 +78,37 @@
              class="form-control profile-input"/>
       </div>
 
-      <div class="form-group"> <!-- Street 1 -->
-        <label for="autocomplete" class="control-label">Street Address</label>
-        <input #autocomplete type="text" class="form-control" id="autocomplete" [(ngModel)]="property.address.number"
-               name="street1" placeholder="Street address, P.O. box, company name, c/o">
+      <div class="form-group">
+        <label for="autocomplete" class="control-label"> Address</label>
+        <input #autocomplete type="text" class="form-control" id="autocomplete"
+               name="street1" placeholder="Powered By Google">
       </div>
 
-      <div class="form-group"> <!-- Street 2 -->
+      <div class="form-group">
+        <label for="autocomplete" class="control-label">Street Address</label>
+        <input [(ngModel)]='property.address.number' type="text" class="form-control" id="street21_id" name="street2"
+               placeholder="Street address, P.O. box, company name, c/o">
+      </div>
+
+      <div class="form-group">
         <label for="street2_id" class="control-label">Apt, Suite.(optional) </label>
         <input [(ngModel)]='property.address.street' type="text" class="form-control" id="street2_id" name="street2"
                placeholder="Apartment, suite, unit, building, floor, etc.">
       </div>
 
-      <div class="form-group"> <!-- City-->
+      <div class="form-group">
         <label for="city_id" class="control-label">City</label>
         <input type="text" [(ngModel)]='property.address.city' class="form-control" id="city_id" name="city"
-               placeholder="Smallville">
+               placeholder="Boston">
       </div>
 
-      <div class="form-group"> <!-- State Button -->
+      <div class="form-group">
         <label for="state_id" class="control-label">State</label>
-        <input type="text" [(ngModel)]='property.address.state' class="form-control" id="state_id" name="city"
-               placeholder="Smallville">
+        <input type="text" [(ngModel)]='state' class="form-control" id="state_id" name="city"
+               placeholder="MA">
       </div>
 
-      <div class="form-group"> <!-- Country Button -->
-        <label for="country_id" class="control-label">Country</label>
-        <input type="text" [(ngModel)]='property.address.country' class="form-control" id="country_id" name="city"
-               placeholder="Smallville">
-      </div>
-
-      <div class="form-group"> <!-- Zip Code-->
+      <div class="form-group">
         <label for="zip_id" class="control-label">Zip Code</label>
         <input type="number" [(ngModel)]="property.address.zip" class="form-control" id="zip_id" name="zip"
                placeholder="#####">
@@ -123,7 +123,7 @@
       </div>
 
       <div class="form-group">
-      <label for="size" class="control-label">Size</label>
+      <label for="size" class="control-label">Size(in sqft)</label>
       <input id="size"
              [(ngModel)]="property.size"
              placeholder="in sq ft Example: 1200"
