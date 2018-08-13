@@ -16,7 +16,7 @@ export class AutocompleteComponent implements OnInit {
   filteredOptions: Observable<University> = new Observable<University>();
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
+    this.filteredOptions = <any>this.myControl.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value))

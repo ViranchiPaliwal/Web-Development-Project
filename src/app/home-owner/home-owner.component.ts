@@ -61,6 +61,7 @@ export class HomeOwnerComponent implements OnInit {
   isTenant = false
   isOwner = false
   role = USER_ROLE
+  title
   ngOnInit() {
     this.property.address = new Address()
     this.autocompleter = new google.maps.places.Autocomplete(
@@ -107,7 +108,8 @@ export class HomeOwnerComponent implements OnInit {
           this.property = property
           this.isNew = false;
           this.university = property.university
-          this.myControl._onChange[0](this.university.Institution_Name)
+            var control = <any> this.myControl
+          control._onChange[0](this.university.Institution_Name)
         });
     }
 
@@ -212,7 +214,7 @@ export class HomeOwnerComponent implements OnInit {
         }
       );
 
-    this.filteredOptions = this.myControl.valueChanges
+    this.filteredOptions = <any> this.myControl.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value))
@@ -256,7 +258,8 @@ export class HomeOwnerComponent implements OnInit {
   }
 
   delete() {
-    this.propertyService.deleteProperty(this.property._id)
+    var prop = <any>this.property
+    this.propertyService.deleteProperty(prop._id)
       .then(() =>
         this.router.navigate(['listing/self'])
       );
