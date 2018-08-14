@@ -20,7 +20,7 @@ import {UniversityServiceClient} from "./services/university.service.client";
 import { HomeTenantComponent } from './home-tenant/home-tenant.component';
 import { HomeOwnerComponent } from './home-owner/home-owner.component';
 import { CloudinaryModule } from '@cloudinary/angular-5.x';
-import * as  Cloudinary from 'cloudinary-core';
+import { Cloudinary } from 'cloudinary-core';
 import {HttpClientModule} from "@angular/common/http";
 import {WishlistServiceClient} from "./services/wishlist.service.client";
 import { PropertyDetailComponent } from './property-detail/property-detail.component';
