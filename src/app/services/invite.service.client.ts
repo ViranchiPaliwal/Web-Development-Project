@@ -1,12 +1,21 @@
 export class InviteServiceClient {
-    URL = 'http://localhost:4000/api/';
+    URL = 'https://web-dev-project-client-node.herokuapp.com/api/';
 
-  addToInvitation(propertyId) {
-    const url = this.URL + 'invite/property/' + propertyId;
+  addToInvitation(invite) {
+    const url = this.URL + 'invite/property';
     return fetch(url, {
       method: 'post',
-      credentials: 'include'
+      body: JSON.stringify(invite),
+      headers: {
+        'content-type': 'application/json'
+      }
     });
+  }
+
+  findAllInvites(){
+    const url = this.URL + 'invite';
+    return fetch(url)
+      .then(response => response.json());
   }
 
   findInvitationByCredentials(propertyId) {

@@ -1,11 +1,15 @@
 <app-navigation-bar [isLoggedIn]="isLoggedIn" [isOwner]="isOwner" [isTenant]="isTenant"></app-navigation-bar>
 <div class="container">
-  <h2 class="register-component">Search Property</h2>
+  <h2 class="propHeader">Search Property</h2>
+
   <label for="universit">University</label>
   <!--<select id="universit" class='form-control register-component' required [(ngModel)]='property.university'>-->
   <!--<option class='university' *ngFor='let university of universities' [value]="university">{{university}}</option>-->
   <!--</select>-->
   <app-autocomplete id="universit" [valueChange]="autocompleteValueChange.bind(this)" [(options)]="universities"></app-autocomplete>
+  <div *ngIf="isPropListEmpty" class="propHeader">
+    <i> No property posted for this university. Try another university close by.</i>
+  </div>
   <ul class="list-group">
     <li *ngFor="let property of properties"
         class="list-group-item">

@@ -1,5 +1,5 @@
 export class WishlistServiceClient {
-    URL = 'http://localhost:4000/api/';
+    URL = 'https://web-dev-project-client-node.herokuapp.com/api/';
 
   findWishListedPropertiesForUser(tenanId) {
     const url = this.URL + 'tenant/property/'+tenanId;

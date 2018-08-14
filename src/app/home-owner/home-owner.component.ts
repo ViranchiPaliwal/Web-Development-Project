@@ -1,4 +1,4 @@
-import {Component, Input, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import {UniversityServiceClient} from "../services/university.service.client";
 import {UserServiceClient} from "../services/user.service.client";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -14,6 +14,7 @@ import {map, startWith} from "rxjs/operators";
 import {Observable} from "rxjs/index";
 import {FormControl} from "@angular/forms";
 import {USER_ROLE} from "../enums/userRole";
+//import {$} from "../../../accommodare-client-angular/accommodare-client-angular/node_modules/protractor/built";
 
 @Component({
   selector: 'app-home-owner',
@@ -62,13 +63,20 @@ export class HomeOwnerComponent implements OnInit {
   isOwner = false
   role = USER_ROLE
   title
-  state
+  isPropertyValid = true
+  @ViewChild('street') street: ElementRef;
+  @ViewChild('apt') apt: ElementRef;
+  @ViewChild('state') state: ElementRef;
+  @ViewChild('city') city: ElementRef;
+  @ViewChild('zip') zip: ElementRef;
+
   ngOnInit() {
     this.property.address = new Address()
     this.autocompleter = new google.maps.places.Autocomplete(
       /** @type {!HTMLInputElement} */this.autocomplete.nativeElement,
       {types: ['geocode']});
     // this.autocompleter.addListener('place_changed', this.fillInAddress);
+
     google.maps.event.addListener(this.autocompleter, 'place_changed', () => { // arrow function
       this.addressForm = this.cleanAddressForm();
       var place = this.autocompleter.getPlace();
@@ -81,19 +89,19 @@ export class HomeOwnerComponent implements OnInit {
           this.addressForm[addressType] = place.address_components[i]['short_name'];
         }
       }
-      this.property.address.number = this.addressForm.street_number
-      this.property.address.street = this.addressForm.route
-      this.state = this.addressForm.administrative_area_level_1
-      this.property.address.city = this.addressForm.locality
-      this.property.address.state = this.addressForm.administrative_area_level_1
-      this.property.address.zip = this.addressForm.postal_code
+      // $('#street').val('xyz');
+      // $('#street').trigger('input');
+      this.street.nativeElement.value = this.property.address.number = this.addressForm.street_number
+      this.apt.nativeElement.value = this.property.address.street = this.addressForm.route
+      this.city.nativeElement.value = this.property.address.city = this.addressForm.locality
+      this.state.nativeElement.value = this.property.address.state = this.addressForm.administrative_area_level_1
+      this.zip.nativeElement.value = this.property.address.zip = this.addressForm.postal_code
 
     });
 
     this.userService.profile()
       .then(user => {
         if (!user.invalid&&user.role!=this.role.Tenant) {
-          this.user = user;
           this.isLoggedIn = true;
           if(user.role===this.role.Owner){
             this.isOwner = true;
@@ -245,17 +253,45 @@ export class HomeOwnerComponent implements OnInit {
   }
 
   submit() {
+    this.property.address.number = this.street.nativeElement.value
+    this.property.address.street = this.apt.nativeElement.value
+    this.property.address.city = this.city.nativeElement.value
+    this.property.address.state = this.state.nativeElement.value
+    this.property.address.zip = this.zip.nativeElement.value
+
+    this.validate()
+    if(this.isPropertyValid){
     this.propertyService.createProperty(this.property)
       .then(() =>
         this.router.navigate(['listing/self'])
       );
+    }
+  }
+
+  validate(){
+    if(this.property.name==''||
+      this.property.university==''||
+      this.property.type==''||
+      this.property.availabilityType==''||
+      this.property.address.city==''||
+      this.property.address.state==''||
+      this.property.address.zip==0){
+      this.isPropertyValid = false
+    }
+    else
+      {
+        this.isPropertyValid = true
+      }
   }
 
   update() {
     this.propertyService.updateProperty(this.property)
       .then(() =>
           this.propertyService.findPropertyById(this.propertyId)
-            .then((property) => this.property = property)
+            .then((property) => {
+              this.property = property
+              alert("University details updated successfully.")
+            })
       );
   }
 

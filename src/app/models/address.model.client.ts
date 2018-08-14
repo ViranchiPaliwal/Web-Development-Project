@@ -4,7 +4,7 @@ export class Address {
   city: String;
   country: String;
   state: String;
-  zip: String;
+  zip: Number;
 
   constructor() {
     this.number = "";
@@ -12,6 +12,6 @@ export class Address {
     this.city = "";
     this.country = "";
     this.state = "";
-    this.zip = "";
+    this.zip = 0;
   }
 }

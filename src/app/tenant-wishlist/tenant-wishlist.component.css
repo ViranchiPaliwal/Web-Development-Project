@@ -5,3 +5,13 @@
   align-items: center;
   align-content: center;
 }
+
+
+.propHeader{
+  text-align: center;
+  margin: 20px;
+}
+
+.propImg{
+  margin-right: 20px;
+}

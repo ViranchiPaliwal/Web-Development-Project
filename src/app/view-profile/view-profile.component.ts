@@ -36,13 +36,13 @@ export class ViewProfileComponent implements OnInit {
   ngOnInit() {
     this.service.profile()
       .then(user => {
-        if (!user.invalid&&user.role!=this.role.Admin) {
+        if (!user.invalid) {
           var user = user;
           this.isLoggedIn = true;
-          if(user.role===this.role.Tenant){
+          if(user.role==this.role.Tenant){
             this.isTenant = true;
           }
-          else{
+          if(user.role==this.role.Owner){
             this.isOwner = true;
           }
         } else {

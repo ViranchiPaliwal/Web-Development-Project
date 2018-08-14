@@ -4,6 +4,7 @@ import {UserServiceClient} from "../services/user.service.client";
 import {Router} from "@angular/router";
 import {User} from "../models/user.model.client";
 import {WishlistServiceClient} from "../services/wishlist.service.client";
+import {InviteServiceClient} from "../services/invite.service.client";
 
 @Component({
   selector: 'app-home-admin',
@@ -16,6 +17,7 @@ export class HomeAdminComponent implements OnInit {
               private userService: UserServiceClient,
               private propService: PropertyServiceClient,
               private wishService: WishlistServiceClient,
+              private inviteService: InviteServiceClient,
               private router: Router) {
 
   }
@@ -30,6 +32,8 @@ export class HomeAdminComponent implements OnInit {
   properties
   wishUser
   wishProp
+  inviteUser
+  inviteProp
   ngOnInit() {
     this.findAllUsers()
     this.propService.findAllProperties()
@@ -79,9 +83,8 @@ export class HomeAdminComponent implements OnInit {
   }
 
   addToWishlist(){
-    console.log(this.wishUser)
-    console.log(this.wishProp)
     this.wishService.addTenantPropertyToWishlist(this.wishUser,this.wishProp)
+      .then(() => alert("Wishlist updated successfully."))
   }
 
   cleanNewUser(){
@@ -91,6 +94,20 @@ export class HomeAdminComponent implements OnInit {
 
   createProperty(){
     this.router.navigate(['property/new']);
+  }
+
+  invites(userId){
+  this.router.navigate(['invites/',userId]);
+  }
+
+  addToInvitelist(){
+    var invite = {
+      user: this.inviteUser,
+      property: this.inviteProp,
+      status: "Pending"
+    }
+    this.inviteService.addToInvitation(invite)
+      .then(() => alert("InviteList updated successfully."))
   }
 
 

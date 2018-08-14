@@ -1,0 +1,39 @@
+<app-navigation-bar [isLoggedIn]="isLoggedIn" [isOwner]="isOwner" [isTenant]="isTenant"></app-navigation-bar>
+<div class="container">
+  <h1 class="address-component propHeader">Tenant Invites</h1>
+  <div *ngIf="isInvitesEmpty" class="propHeader">
+    <i> Your invite list is empty right now. No tenant invitation are pending you're all set.</i>
+  </div>
+  <table *ngIf="!isInvitesEmpty" class="table table-bordered">
+    <thead>
+    <th>Tenant Name</th>
+    <th>Property Name</th>
+    <th colspan="3">Options</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let invite of filteredInvites">
+
+      <td>
+        {{invite.user.username}}
+      </td>
+      <td>
+        {{invite.property.name}}
+      </td>
+
+      <td>
+        <button (click)="accept(invite)" class="btn btn-primary">
+          Accept
+        </button>
+      </td>
+      <td>
+        <button (click)="reject(invite)" class="btn btn-danger">
+          Reject
+        </button>
+      </td>
+      <td>
+        <a routerLink="/viewprofile/{{invite.user._id}}">View Tenant Profile</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

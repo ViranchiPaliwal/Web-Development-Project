@@ -30,6 +30,7 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { HomeAdminComponent } from './home-admin/home-admin.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { TenantWishlistComponent } from './tenant-wishlist/tenant-wishlist.component';
+import { OwnerInvitesComponent } from './owner-invites/owner-invites.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { TenantWishlistComponent } from './tenant-wishlist/tenant-wishlist.compo
     OwnerPropertyDetailComponent,
     ViewProfileComponent,
     HomeAdminComponent,
-    TenantWishlistComponent
+    TenantWishlistComponent,
+    OwnerInvitesComponent
   ],
   imports: [
     BrowserModule,

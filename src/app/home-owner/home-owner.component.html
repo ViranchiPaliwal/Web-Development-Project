@@ -30,14 +30,17 @@
     </span>
     </div>
     <div class="col-8">
+      <div class="alert alert-danger" role="alert" *ngIf="!isPropertyValid">
+        Kindly provide all the required field and retry.
+      </div>
       <div class="form-group">
-        <label for="name" class="control-label">Name</label>
+        <label for="name" class="control-label required">Name</label>
         <input type="text" class="form-control" id="name" [(ngModel)]="property.name"
                placeholder="My Shadowbrook Guest House">
       </div>
 
       <div class="form-group">
-      <label class="control-label" for="owneruniversity">University</label>
+      <label class="control-label required" for="owneruniversity">University</label>
         <input id="owneruniversity" class="form-control" type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
         <mat-autocomplete  #auto="matAutocomplete">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name" (onSelectionChange)="autocompleteOwnerValueChange(option)">
@@ -47,21 +50,21 @@
       </div>
 
       <div class="form-group">
-      <label class="control-label" for="propType">Type of place</label>
+      <label class="control-label required" for="propType">Type of place</label>
       <select id="propType" class='form-control' required [(ngModel)]='property.type'>
         <option class='aptType' *ngFor='let type of propertyTypes' [value]="type">{{type}}</option>
       </select>
       </div>
 
       <div class="form-group">
-      <label for="availablity">Availablity</label>
+      <label for="availablity" class="control-label required">Availablity</label>
       <select id="availablity" class='form-control' required [(ngModel)]='property.availabilityType'>
         <option class='availType' *ngFor='let availType of availTypes' [value]="availType">{{availType}}</option>
       </select>
       </div>
 
       <div class="form-group">
-      <label for="price">Price (In $)</label>
+      <label for="price" class="contol-label required">Price (In $)</label>
       <input id="price"
              type="number"
              [(ngModel)]="property.price"
@@ -70,7 +73,7 @@
       </div>
 
       <div class="form-group">
-      <label for="rooms">Number of Rooms</label>
+      <label for="rooms" class="control-label required">Number of Rooms</label>
       <input id="rooms"
              type="number"
              [(ngModel)]="property.rooms"
@@ -79,38 +82,38 @@
       </div>
 
       <div class="form-group">
-        <label for="autocomplete" class="control-label"> Address</label>
+        <label for="autocomplete" class="control-label required"> Address</label>
         <input #autocomplete type="text" class="form-control" id="autocomplete"
-               name="street1" placeholder="Powered By Google">
+                placeholder="Powered By Google">
       </div>
 
       <div class="form-group">
-        <label for="autocomplete" class="control-label">Street Address</label>
-        <input [(ngModel)]='property.address.number' type="text" class="form-control" id="street21_id" name="street2"
+        <label for="street"  class="control-label">Street Address</label>
+        <input #street  type="text" class="form-control" id="street"
                placeholder="Street address, P.O. box, company name, c/o">
       </div>
 
       <div class="form-group">
         <label for="street2_id" class="control-label">Apt, Suite.(optional) </label>
-        <input [(ngModel)]='property.address.street' type="text" class="form-control" id="street2_id" name="street2"
+        <input #apt type="text" class="form-control" id="street2_id"
                placeholder="Apartment, suite, unit, building, floor, etc.">
       </div>
 
       <div class="form-group">
-        <label for="city_id" class="control-label">City</label>
-        <input type="text" [(ngModel)]='property.address.city' class="form-control" id="city_id" name="city"
+        <label for="city_id" class="control-label required">City</label>
+        <input #city type="text" #city class="form-control" id="city_id"
                placeholder="Boston">
       </div>
 
       <div class="form-group">
-        <label for="state_id" class="control-label">State</label>
-        <input type="text" [(ngModel)]='state' class="form-control" id="state_id" name="city"
+        <label for="state_id" class="control-label required">State</label>
+        <input #state type="text" #state class="form-control" id="state_id"
                placeholder="MA">
       </div>
 
       <div class="form-group">
-        <label for="zip_id" class="control-label">Zip Code</label>
-        <input type="number" [(ngModel)]="property.address.zip" class="form-control" id="zip_id" name="zip"
+        <label for="zip_id" class="control-label required">Zip Code</label>
+        <input #zip type="number" #zip class="form-control" id="zip_id"
                placeholder="#####">
       </div>
 

@@ -2,10 +2,9 @@
   margin: 15px 0px 15px 0px;
 }
 .propHeader{
-  text-align: center;
-  margin: 20px;
-}
-.address-component{
-  margin: 15px;
+  margin: 10px;
 }
 
+.required:after { content:" *";
+                  color:red
+                }

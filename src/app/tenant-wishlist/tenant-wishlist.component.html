@@ -1,49 +1,63 @@
 <app-navigation-bar [isLoggedIn]="isLoggedIn" [isOwner]="isOwner" [isTenant]="isTenant"></app-navigation-bar>
-<ul class="list-group">
-  <li *ngFor="let property of properties"
-      class="list-group-item">
-    <div class="row">
-      <div class="col-4">
-      <div *ngIf="property.photoId.length==0">
-        <img src="../../assets/img/default-property.jpg" class="img-fluid">
+
+<div class="container">
+  <h1 class="propHeader">Wish List</h1>
+
+  <div *ngIf="isWishListEmpty" class="propHeader">
+    <i> Your wish list is empty right now. Add your potential properties and save time of searching.</i>
+  </div>
+
+  <ul class="list-group">
+    <li *ngFor="let property of properties"
+        class="list-group-item">
+      <div class="row">
+        <div class="col-4">
+          <div *ngIf="property.photoId.length==0">
+            <img src="../../assets/img/default-property.jpg" class="img-fluid">
+          </div>
+          <div *ngIf="property.photoId.length > 0" class="container-fluid">
+            <cl-image
+              [public-id]=property.photoId[0]
+              class="thumbnail inline"
+              width="300"
+              height="300"
+              crop="fit"
+            >
+            </cl-image>
+          </div>
+        </div>
+        <div class="col-8">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div>Type: {{property.type}}</div>
+            </li>
+            <li class="list-group-item">
+              <div>Availability Type: {{property.availabilityType}}</div>
+            </li>
+            <li class="list-group-item">
+              <div>Address: {{property.address.number}} {{property.address.street}} {{property.address.city}}
+                {{property.address.zip}}
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div>Price: ${{property.price}}</div>
+            </li>
+            <li class="list-group-item">
+              <div>Rooms: {{property.rooms}}</div>
+            </li>
+            <li class="list-group-item">
+              <div>Size: {{property.size}} sqft</div>
+            </li>
+            <li class="list-group-item btn-group btn-parent">
+              <button *ngIf="!isAdmin" class="btn btn-success" routerLink="/propertydetail/{{property._id}}">View
+                Details
+              </button>
+              <button class="btn btn-danger" (click)="deleteFromWishList(property._id)">Remove</button>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div *ngIf="property.photoId.length > 0" class="container-fluid">
-        <cl-image
-          [public-id]=property.photoId[0]
-          class="thumbnail inline"
-          width="300"
-          height="300"
-          crop="fit"
-        >
-        </cl-image>
-      </div>
-    </div>
-      <div class="col-8">
-        <ul class="list-group">
-          <li class="list-group-item">
-            <div>Type: {{property.type}}</div>
-          </li>
-          <li class="list-group-item">
-            <div>Availability Type: {{property.availabilityType}}</div>
-          </li>
-          <li class="list-group-item">
-            <div>Address: {{property.address.number}} {{property.address.street}} {{property.address.city}} {{property.address.zip}}</div>
-          </li>
-          <li class="list-group-item">
-            <div>Price: ${{property.price}}</div>
-          </li>
-          <li class="list-group-item">
-            <div>Rooms: ${{property.rooms}}</div>
-          </li>
-          <li class="list-group-item">
-            <div>Size: ${{property.size}} sqft</div>
-          </li>
-          <li class="list-group-item btn-group btn-parent">
-            <button *ngIf="!isAdmin" class="btn btn-success" routerLink="/propertydetail/{{property._id}}">View Details</button>
-            <button class="btn btn-danger"  (click)="deleteFromWishList(property._id)">Remove</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </li>
-</ul>
+    </li>
+  </ul>
+</div>
+

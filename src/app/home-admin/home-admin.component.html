@@ -23,6 +23,11 @@
         Edit Apartments
       </button>
     </td>
+    <td>
+      <button (click)="invites(user._id)" class="btn btn-info">
+        Edit InvitesList
+      </button>
+    </td>
   </tr>
   </tbody>
 </table>
@@ -68,6 +73,9 @@
   <tbody>
 <tr>
   <td>
+    Provide username followed by password
+  </td>
+  <td>
 <input [(ngModel)]="newuser.username"
        placeholder="username"
        class="form-control"/>
@@ -93,6 +101,9 @@
 </tr>
 <tr>
   <td>
+    Select tenant followed by property
+  </td>
+  <td>
     <select class='form-control ' required [(ngModel)]='wishUser'>
       <option class='option' *ngFor='let user of tenants' [value]="user._id">{{user.username}}</option>
     </select>
@@ -111,6 +122,31 @@
   </td>
 </tr>
 <tr>
+  <td>
+    Select tenant followed by property
+  </td>
+  <td>
+    <select class='form-control ' required [(ngModel)]='inviteUser'>
+      <option class='option' *ngFor='let user of tenants' [value]="user._id">{{user.username}}</option>
+    </select>
+  </td>
+  <td>
+    <select class='form-control ' required [(ngModel)]='inviteProp'>
+      <option class='option' *ngFor='let prop of properties' [value]="prop._id">{{prop.name}}</option>
+    </select>
+  </td>
+
+  <td>
+    <button (click)="addToInvitelist()"
+            class="btn btn-primary btn-block">
+      Send an invite
+    </button>
+  </td>
+</tr>
+<tr>
+  <td>
+    Create new Property
+  </td>
   <td>
     <button (click)="createProperty()"
             class="btn btn-primary btn-block">

@@ -1,12 +1,8 @@
-<app-navigation-bar [isLoggedIn]="true"></app-navigation-bar>
-<!--<ul class="list-group">-->
-  <!--<li *ngFor="let property of propList"-->
-      <!--class="list-group-item">-->
-    <!--<div routerLink="/propertydetail/{{property._id}}">-->
-      <!--{{property.name}}-->
-    <!--</div>-->
-  <!--</li>-->
-<!--</ul>-->
+<app-navigation-bar [isLoggedIn]="isLoggedIn" [isOwner]="isOwner" [isTenant]="isTenant"></app-navigation-bar>
+<h1 class="propHeader">Property Listing</h1>
+<div *ngIf="isPropListEmpty" class="propHeader">
+  <i>Your property list is empty right. Add your property potential tenants are step away.</i>
+</div>
 <ul class="list-group">
   <li *ngFor="let property of properties"
       class="list-group-item">

@@ -12,6 +12,7 @@ import {ViewProfileComponent} from "./view-profile/view-profile.component";
 import {HomeOwnerComponent} from "./home-owner/home-owner.component";
 import {HomeTenantComponent} from "./home-tenant/home-tenant.component";
 import {TenantWishlistComponent} from "./tenant-wishlist/tenant-wishlist.component";
+import {OwnerInvitesComponent} from "./owner-invites/owner-invites.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
   {path: 'wishlist/:tenantId', component:TenantWishlistComponent},
   {path: 'propertydetail/:propertyId', component: PropertyDetailComponent},
   {path: 'owner/property/:propertyId', component: OwnerPropertyDetailComponent},
+  {path: 'invites/:userId', component: OwnerInvitesComponent},
   {path: '**', component: HomeScreenComponent}
 ];
 export const routing = RouterModule.forRoot(appRoutes);

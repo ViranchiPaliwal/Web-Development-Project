@@ -36,6 +36,7 @@ export class HomeTenantComponent implements OnInit {
   isOwner = false
   role = USER_ROLE
   user
+  isPropListEmpty = false
   ngOnInit() {
 
     this.userService.profile()
@@ -66,7 +67,15 @@ export class HomeTenantComponent implements OnInit {
   autocompleteValueChange(selectedUniversity) {
     this.propertyService
       .findPropertiesForUniversity(selectedUniversity.id)
-      .then((properties) => this.properties = properties);
+      .then((properties) => {
+        this.properties = properties
+        if(this.properties && this.properties.length==0){
+          this.isPropListEmpty = true;
+        }
+        else{
+          this.isPropListEmpty = false;
+        }
+      });
   }
 
   checkAlreadyInWishList(propertyId) {

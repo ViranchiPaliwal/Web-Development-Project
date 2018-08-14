@@ -1,5 +1,5 @@
 export class UniversityServiceClient {
-    URL = 'http://localhost:4000/api/';
+    URL = 'https://web-dev-project-client-node.herokuapp.com/api/';
 
     findAllUniversities() {
         return fetch(this.URL + 'university')

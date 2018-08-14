@@ -90,7 +90,12 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   addToInvite(propertyId){
-    this.inviteService.addToInvitation(propertyId)
+    var invite = {
+      user: this.user._id,
+      property: this.propertyId,
+      status: "Pending"
+    }
+    this.inviteService.addToInvitation(invite)
       .then(() => {
         this.getInviteStatus(propertyId)
       })

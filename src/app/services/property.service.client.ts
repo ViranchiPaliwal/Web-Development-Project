@@ -1,5 +1,5 @@
 export class PropertyServiceClient {
-    URL = 'http://localhost:4000/api/';
+    URL = 'https://web-dev-project-client-node.herokuapp.com/api/';
 
   createProperty(property) {
     return fetch(this.URL + 'owner/property', {

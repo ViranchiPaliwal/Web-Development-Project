@@ -37,6 +37,7 @@ export class TenantWishlistComponent implements OnInit {
   isOwner = false
   role = USER_ROLE
   user
+  isWishListEmpty
   ngOnInit() {
     this.userService.profile()
       .then(user => {
@@ -59,8 +60,15 @@ export class TenantWishlistComponent implements OnInit {
 
   findWishListedPropertiesForUser(){
     this.wishlistService.findWishListedPropertiesForUser(this.tenantId)
-      .then((wishlist) =>{ this.properties = wishlist.map((wish) => wish.property);
-      console.log('success')});
+      .then((wishlist) =>{
+        this.properties = wishlist.map((wish) => wish.property);
+        if(this.properties && this.properties.length==0){
+          this.isWishListEmpty = true;
+        }
+        else{
+          this.isWishListEmpty = false;
+        }
+      });
   }
 
 
