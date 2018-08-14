@@ -31,6 +31,11 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { TenantWishlistComponent } from './tenant-wishlist/tenant-wishlist.component';
 import { OwnerInvitesComponent } from './owner-invites/owner-invites.component';
+
+export const cloudinaryLib = {
+  Cloudinary: Cloudinary
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +66,10 @@ import { OwnerInvitesComponent } from './owner-invites/owner-invites.component';
     HttpClientModule,
     FileUploadModule,
     NgbModule.forRoot(),
-    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'hssso26ip', upload_preset: 'wups8v99'}),
+    CloudinaryModule.forRoot(cloudinaryLib, {
+      cloud_name: 'hssso26ip',
+      upload_preset: 'wups8v99'
+    }),
     routing
   ],
   providers: [UserServiceClient,
