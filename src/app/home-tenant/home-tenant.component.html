@@ -44,10 +44,10 @@
             <div>Price: ${{property.price}}</div>
             </li>
             <li class="list-group-item">
-              <div>Rooms: ${{property.rooms}}</div>
+              <div>Rooms: {{property.rooms}}</div>
             </li>
             <li class="list-group-item">
-              <div>Size: ${{property.size}} sqft</div>
+              <div>Size: {{property.size}} sqft</div>
             </li>
             <li *ngIf="isTenant" class="list-group-item btn-group btn-parent">
             <button class="btn btn-primary" *ngIf="checkAlreadyInWishList(property._id)" (click)="addToWishList(property._id)">Add to Wishlist</button>

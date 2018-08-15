@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
     isLoggedIn = false;
     isPasswordInvaild = false;
     isUsernameExist = false;
-    userTypes= ["Owner", "Tenant"];
+    userTypes= ["Owner", "Tenant", "Admin"];
     register() {
         if (this.user.password !== this.password2) {
             this.isPasswordInvaild = true;
