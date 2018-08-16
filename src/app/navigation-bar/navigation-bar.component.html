@@ -19,10 +19,16 @@
                 <a routerLink="/profile/self" *ngIf="isLoggedIn" class="nav-item nav-link active">Profile</a>
             </li>
           <li class="nav-item active">
+            <a routerLink="/property/new" *ngIf="isLoggedIn  && isOwner" class="nav-item nav-link active">Post</a>
+          </li>
+          <li class="nav-item active">
             <a routerLink="/listing/self" *ngIf="isLoggedIn  && isOwner" class="nav-item nav-link active">MyPosting</a>
           </li>
           <li class="nav-item active">
             <a routerLink="/invites/self" *ngIf="isLoggedIn  && isOwner" class="nav-item nav-link active">MyInvites</a>
+          </li>
+          <li class="nav-item active">
+            <a routerLink="/searchproperty" *ngIf="isLoggedIn  && isTenant" class="nav-item nav-link active">Search</a>
           </li>
           <li class="nav-item active">
             <a routerLink="/wishlist/self" *ngIf="isLoggedIn  && isTenant" class="nav-item nav-link active">Wishlist</a>

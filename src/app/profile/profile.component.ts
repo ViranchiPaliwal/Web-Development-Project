@@ -189,7 +189,14 @@ export class ProfileComponent implements OnInit {
   deleteProfile() {
     this.service
       .deleteProfile(this.user)
-      .then(() => this.router.navigate(['login']))
+      .then(() => {
+        if (this.isAdmin) {
+          this.router.navigate(['home']);
+        }
+        else {
+          this.router.navigate(['login']);
+        }
+      })
   }
 
   findUserById(){

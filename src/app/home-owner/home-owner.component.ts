@@ -235,7 +235,7 @@ export class HomeOwnerComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.universities.filter(option => {
-      if (option.name.toLowerCase().includes(filterValue)) {
+      if (option.name.toLowerCase().indexOf(filterValue)===0) {
         return option;
       }
     })

@@ -1,5 +1,5 @@
 <app-navigation-bar [isLoggedIn]="isLoggedIn" [isOwner]="isOwner" [isTenant]="isTenant"></app-navigation-bar>
-<div>
+<div *ngIf="property">
   <div class="propertyImg">
     <div *ngIf="property.photoId.length==0" class="propDetailImg row" >
       <img src="../../assets/img/default-property.jpg" class="img-fluid">
