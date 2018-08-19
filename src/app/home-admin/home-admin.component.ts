@@ -71,8 +71,9 @@ export class HomeAdminComponent implements OnInit {
         if (user.invalid) {
           this.isUsernameExist = false;
           this.userService
-            .createUser(this.newuser)
+            .createUserAdmin(this.newuser)
             .then(() => {
+            alert("New user successfully created.")
             this.findAllUsers()
             this.cleanNewUser()
             })

@@ -79,4 +79,16 @@ export class UserServiceClient {
             }
         });
     }
+
+  createUserAdmin(user) {
+    return fetch(this.URL + 'create', {
+      body: JSON.stringify(user),
+      credentials: 'include', // include, same-origin, *omit
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
 }
